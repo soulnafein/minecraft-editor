@@ -1,42 +1,30 @@
 //= require makeClass
 //= require gl-matrix
-//= require scene
+//= require gl
+//= require shaderHelper
+//= require shaders
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
   MinecraftEditor.Program = makeClass();
   var proto = MinecraftEditor.Program.prototype;
 
-  proto.init = function(canvas) {
+  proto.init = function() {
+    this.canvas = document.getElementById("lesson01-canvas");
   };
 
-  proto.webGLStart = function() {
-    var canvas = document.getElementById("lesson01-canvas");
-    GL.init(canvas);
+  proto.start = function() {
+    GL.init(this.canvas);
     this.initShaders();
     this.initBuffers();
-
-    this.mvMatrix = mat4.create();
-    this.pMatrix = mat4.create();
-    GL.clearColor(0.0, 0.0, 0.0, 1.0);
-    GL.enable(GL.DEPTH_TEST);
-
     this.drawScene();
-  }
+  };
 
   proto.initShaders = function() {
-    var fragmentShader = getShader(GL, "shader-fs");
-    var vertexShader = getShader(GL, "shader-vs");
+    var fragmentShader = ShaderHelper.loadFragmentShader(MinecraftEditor.Shaders.fragmentShader);
+    var vertexShader = ShaderHelper.loadVertextShader(MinecraftEditor.Shaders.vertexShader);
 
-    this.shaderProgram = GL.createProgram();
-    GL.attachShader(this.shaderProgram, vertexShader);
-    GL.attachShader(this.shaderProgram, fragmentShader);
-    GL.linkProgram(this.shaderProgram);
-
-    if (!GL.getProgramParameter(this.shaderProgram, GL.LINK_STATUS)) {
-      alert("Could not initialise shaders");
-    }
-
-    GL.useProgram(this.shaderProgram);
+    var shaders = [fragmentShader, vertexShader];
+    this.shaderProgram = ShaderHelper.createProgram(shaders);
 
     this.shaderProgram.vertexPositionAttribute = GL.getAttribLocation(this.shaderProgram, "aVertexPosition");
     GL.enableVertexAttribArray(this.shaderProgram.vertexPositionAttribute);
@@ -44,42 +32,6 @@ var MinecraftEditor = MinecraftEditor || {};
     this.shaderProgram.pMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uPMatrix");
     this.shaderProgram.mvMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uMVMatrix");
   };
-
-  function getShader(gl, id) {
-    var shaderScript = document.getElementById(id);
-    if (!shaderScript) {
-      return null;
-    }
-
-    var str = "";
-    var k = shaderScript.firstChild;
-    while (k) {
-      if (k.nodeType == 3) {
-        str += k.textContent;
-      }
-      k = k.nextSibling;
-    }
-
-    var shader;
-    if (shaderScript.type == "x-shader/x-fragment") {
-      shader = gl.createShader(gl.FRAGMENT_SHADER);
-    } else if (shaderScript.type == "x-shader/x-vertex") {
-      shader = gl.createShader(gl.VERTEX_SHADER);
-    } else {
-      return null;
-    }
-
-    gl.shaderSource(shader, str);
-    gl.compileShader(shader);
-
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      alert(gl.getShaderInfoLog(shader));
-      return null;
-    }
-
-    return shader;
-  }
-
 
   proto.setMatrixUniforms = function() {
     GL.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, this.pMatrix);
@@ -112,6 +64,10 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   proto.drawScene = function() {
+    this.mvMatrix = mat4.create();
+    this.pMatrix = mat4.create();
+    GL.clearColor(0.0, 0.0, 0.0, 1.0);
+    GL.enable(GL.DEPTH_TEST);
     GL.viewport(0, 0, GL.viewportWidth, GL.viewportHeight);
     GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
