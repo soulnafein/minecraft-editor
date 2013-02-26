@@ -1,0 +1,225 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ActiveSupport	test/test_helper.rb	/^class ActiveSupport::TestCase$/;"	c
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:MinecraftEditor
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+BrowsingTest	test/performance/browsing_test.rb	/^class BrowsingTest < ActionDispatch::PerformanceTest$/;"	c
+GL.init	app/assets/javascripts/gl.js	/^GL.init = function(canvas) {$/;"	f
+MinecraftEditor	config/application.rb	/^module MinecraftEditor$/;"	m
+Object	vendor/assets/javascripts/makeClass.js	/^  Object.prototype.bind = function ( fn ) {$/;"	c
+Object.bind	vendor/assets/javascripts/makeClass.js	/^  Object.prototype.bind = function ( fn ) {$/;"	m
+PagesController	app/controllers/pages_controller.rb	/^class PagesController < ApplicationController$/;"	c
+Scene	app/assets/javascripts/scene.js	/^  var Scene = MinecraftEditor.Scene.prototype;$/;"	v
+Scene.init	app/assets/javascripts/scene.js	/^  Scene.init = function(canvas) {$/;"	f
+ShaderHelper.loadFragmentShader	app/assets/javascripts/shaderHelper.js	/^  ShaderHelper.loadFragmentShader = function(source) {$/;"	f
+ShaderHelper.loadVertextShader	app/assets/javascripts/shaderHelper.js	/^  ShaderHelper.loadVertextShader = function(source) {$/;"	f
+createProgram	app/assets/javascripts/shaderHelper.js	/^(function() {$/;"	f
+glMatrix.setMatrixArrayType	vendor/assets/javascripts/gl-matrix-2.js	/^glMatrix.setMatrixArrayType = function(type) {$/;"	f
+index	app/controllers/pages_controller.rb	/^  def index$/;"	f	class:PagesController
+loadShader	app/assets/javascripts/shaderHelper.js	/^  function loadShader(source, type) {$/;"	f
+makeClass	vendor/assets/javascripts/makeClass.js	/^function makeClass(){$/;"	f
+makeClass.Object	vendor/assets/javascripts/makeClass.js	/^  var Object = function(args){$/;"	f
+mat2.adjoint	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.adjoint = function(out, a) {$/;"	f
+mat2.clone	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.clone = function(a) {$/;"	f
+mat2.copy	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.copy = function(out, a) {$/;"	f
+mat2.create	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.create = function() {$/;"	f
+mat2.determinant	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.determinant = function (a) {$/;"	f
+mat2.identity	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.identity = function(out) {$/;"	f
+mat2.invert	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.invert = function(out, a) {$/;"	f
+mat2.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.multiply = function (out, a, b) {$/;"	f
+mat2.rotate	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.rotate = function (out, a, rad) {$/;"	f
+mat2.scale	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.scale = function(out, a, v) {$/;"	f
+mat2.str	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.str = function (a) {$/;"	f
+mat2.transpose	vendor/assets/javascripts/gl-matrix-2.js	/^mat2.transpose = function(out, a) {$/;"	f
+mat2d.clone	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.clone = function(a) {$/;"	f
+mat2d.copy	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.copy = function(out, a) {$/;"	f
+mat2d.create	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.create = function() {$/;"	f
+mat2d.determinant	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.determinant = function (a) {$/;"	f
+mat2d.identity	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.identity = function(out) {$/;"	f
+mat2d.invert	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.invert = function(out, a) {$/;"	f
+mat2d.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.multiply = function (out, a, b) {$/;"	f
+mat2d.rotate	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.rotate = function (out, a, rad) {$/;"	f
+mat2d.scale	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.scale = function(out, a, v) {$/;"	f
+mat2d.str	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.str = function (a) {$/;"	f
+mat2d.translate	vendor/assets/javascripts/gl-matrix-2.js	/^mat2d.translate = function(out, a, v) {$/;"	f
+mat3.adjoint	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.adjoint = function(out, a) {$/;"	f
+mat3.clone	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.clone = function(a) {$/;"	f
+mat3.copy	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.copy = function(out, a) {$/;"	f
+mat3.create	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.create = function() {$/;"	f
+mat3.determinant	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.determinant = function (a) {$/;"	f
+mat3.fromMat2d	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.fromMat2d = function(out, a) {$/;"	f
+mat3.fromMat4	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.fromMat4 = function(out, a) {$/;"	f
+mat3.fromQuat	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.fromQuat = function (out, q) {$/;"	f
+mat3.identity	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.identity = function(out) {$/;"	f
+mat3.identity	vendor/assets/javascripts/gl-matrix.js	/^mat3.create=function(a){var b=new glMatrixArrayType(9);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];b[9]=a[9]}return b};mat3.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];return b};mat3.identity=function(a){a[0]=1;a[1]=0;a[2]=0;a[3]=0;a[4]=1;a[5]=0;a[6]=0;a[7]=0;a[8]=1;return a};$/;"	f
+mat3.invert	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.invert = function(out, a) {$/;"	f
+mat3.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.multiply = function (out, a, b) {$/;"	f
+mat3.rotate	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.rotate = function (out, a, rad) {$/;"	f
+mat3.scale	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.scale = function(out, a, v) {$/;"	f
+mat3.set	vendor/assets/javascripts/gl-matrix.js	/^mat3.create=function(a){var b=new glMatrixArrayType(9);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];b[9]=a[9]}return b};mat3.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];return b};mat3.identity=function(a){a[0]=1;a[1]=0;a[2]=0;a[3]=0;a[4]=1;a[5]=0;a[6]=0;a[7]=0;a[8]=1;return a};$/;"	f
+mat3.str	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.str = function (a) {$/;"	f
+mat3.str	vendor/assets/javascripts/gl-matrix.js	/^mat3.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+", "+a[4]+", "+a[5]+", "+a[6]+", "+a[7]+", "+a[8]+"]"};var mat4={};mat4.create=function(a){var b=new glMatrixArrayType(16);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];b[9]=a[9];b[10]=a[10];b[11]=a[11];b[12]=a[12];b[13]=a[13];b[14]=a[14];b[15]=a[15]}return b};$/;"	f
+mat3.toMat4	vendor/assets/javascripts/gl-matrix.js	/^mat3.transpose=function(a,b){if(!b||a==b){var c=a[1],d=a[2],e=a[5];a[1]=a[3];a[2]=a[6];a[3]=c;a[5]=a[7];a[6]=d;a[7]=e;return a}b[0]=a[0];b[1]=a[3];b[2]=a[6];b[3]=a[1];b[4]=a[4];b[5]=a[7];b[6]=a[2];b[7]=a[5];b[8]=a[8];return b};mat3.toMat4=function(a,b){b||(b=mat4.create());b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=0;b[4]=a[3];b[5]=a[4];b[6]=a[5];b[7]=0;b[8]=a[6];b[9]=a[7];b[10]=a[8];b[11]=0;b[12]=0;b[13]=0;b[14]=0;b[15]=1;return b};$/;"	f
+mat3.translate	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.translate = function(out, a, v) {$/;"	f
+mat3.transpose	vendor/assets/javascripts/gl-matrix-2.js	/^mat3.transpose = function(out, a) {$/;"	f
+mat3.transpose	vendor/assets/javascripts/gl-matrix.js	/^mat3.transpose=function(a,b){if(!b||a==b){var c=a[1],d=a[2],e=a[5];a[1]=a[3];a[2]=a[6];a[3]=c;a[5]=a[7];a[6]=d;a[7]=e;return a}b[0]=a[0];b[1]=a[3];b[2]=a[6];b[3]=a[1];b[4]=a[4];b[5]=a[7];b[6]=a[2];b[7]=a[5];b[8]=a[8];return b};mat3.toMat4=function(a,b){b||(b=mat4.create());b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=0;b[4]=a[3];b[5]=a[4];b[6]=a[5];b[7]=0;b[8]=a[6];b[9]=a[7];b[10]=a[8];b[11]=0;b[12]=0;b[13]=0;b[14]=0;b[15]=1;return b};$/;"	f
+mat4.adjoint	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.adjoint = function(out, a) {$/;"	f
+mat4.clone	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.clone = function(a) {$/;"	f
+mat4.copy	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.copy = function(out, a) {$/;"	f
+mat4.create	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.create = function() {$/;"	f
+mat4.determinant	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.determinant = function (a) {$/;"	f
+mat4.determinant	vendor/assets/javascripts/gl-matrix.js	/^mat4.determinant=function(a){var b=a[0],c=a[1],d=a[2],e=a[3],g=a[4],f=a[5],h=a[6],i=a[7],j=a[8],k=a[9],l=a[10],o=a[11],m=a[12],n=a[13],p=a[14];a=a[15];return m*k*h*e-j*n*h*e-m*f*l*e+g*n*l*e+j*f*p*e-g*k*p*e-m*k*d*i+j*n*d*i+m*c*l*i-b*n*l*i-j*c*p*i+b*k*p*i+m*f*d*o-g*n*d*o-m*c*h*o+b*n*h*o+g*c*p*o-b*f*p*o-j*f*d*a+g*k*d*a+j*c*h*a-b*k*h*a-g*c*l*a+b*f*l*a};$/;"	f
+mat4.fromQuat	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.fromQuat = function (out, q) {$/;"	f
+mat4.fromRotationTranslation	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.fromRotationTranslation = function (out, q, v) {$/;"	f
+mat4.frustum	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.frustum = function (out, left, right, bottom, top, near, far) {$/;"	f
+mat4.frustum	vendor/assets/javascripts/gl-matrix.js	/^mat4.frustum=function(a,b,c,d,e,g,f){f||(f=mat4.create());var h=b-a,i=d-c,j=g-e;f[0]=e*2\/h;f[1]=0;f[2]=0;f[3]=0;f[4]=0;f[5]=e*2\/i;f[6]=0;f[7]=0;f[8]=(b+a)\/h;f[9]=(d+c)\/i;f[10]=-(g+e)\/j;f[11]=-1;f[12]=0;f[13]=0;f[14]=-(g*e*2)\/j;f[15]=0;return f};mat4.perspective=function(a,b,c,d,e){a=c*Math.tan(a*Math.PI\/360);b=a*b;return mat4.frustum(-b,b,-a,a,c,d,e)};$/;"	f
+mat4.identity	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.identity = function(out) {$/;"	f
+mat4.identity	vendor/assets/javascripts/gl-matrix.js	/^mat4.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];b[9]=a[9];b[10]=a[10];b[11]=a[11];b[12]=a[12];b[13]=a[13];b[14]=a[14];b[15]=a[15];return b};mat4.identity=function(a){a[0]=1;a[1]=0;a[2]=0;a[3]=0;a[4]=0;a[5]=1;a[6]=0;a[7]=0;a[8]=0;a[9]=0;a[10]=1;a[11]=0;a[12]=0;a[13]=0;a[14]=0;a[15]=1;return a};$/;"	f
+mat4.inverse	vendor/assets/javascripts/gl-matrix.js	/^mat4.inverse=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=a[3],f=a[4],h=a[5],i=a[6],j=a[7],k=a[8],l=a[9],o=a[10],m=a[11],n=a[12],p=a[13],r=a[14],s=a[15],A=c*h-d*f,B=c*i-e*f,t=c*j-g*f,u=d*i-e*h,v=d*j-g*h,w=e*j-g*i,x=k*p-l*n,y=k*r-o*n,z=k*s-m*n,C=l*r-o*p,D=l*s-m*p,E=o*s-m*r,q=1\/(A*E-B*D+t*C+u*z-v*y+w*x);b[0]=(h*E-i*D+j*C)*q;b[1]=(-d*E+e*D-g*C)*q;b[2]=(p*w-r*v+s*u)*q;b[3]=(-l*w+o*v-m*u)*q;b[4]=(-f*E+i*z-j*y)*q;b[5]=(c*E-e*z+g*y)*q;b[6]=(-n*w+r*t-s*B)*q;b[7]=(k*w-o*t+m*B)*q;b[8]=(f*D-h*z+j*x)*q;$/;"	f
+mat4.invert	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.invert = function(out, a) {$/;"	f
+mat4.lookAt	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.lookAt = function (out, eye, center, up) {$/;"	f
+mat4.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.multiply = function (out, a, b) {$/;"	f
+mat4.multiply	vendor/assets/javascripts/gl-matrix.js	/^mat4.multiply=function(a,b,c){c||(c=a);var d=a[0],e=a[1],g=a[2],f=a[3],h=a[4],i=a[5],j=a[6],k=a[7],l=a[8],o=a[9],m=a[10],n=a[11],p=a[12],r=a[13],s=a[14];a=a[15];var A=b[0],B=b[1],t=b[2],u=b[3],v=b[4],w=b[5],x=b[6],y=b[7],z=b[8],C=b[9],D=b[10],E=b[11],q=b[12],F=b[13],G=b[14];b=b[15];c[0]=A*d+B*h+t*l+u*p;c[1]=A*e+B*i+t*o+u*r;c[2]=A*g+B*j+t*m+u*s;c[3]=A*f+B*k+t*n+u*a;c[4]=v*d+w*h+x*l+y*p;c[5]=v*e+w*i+x*o+y*r;c[6]=v*g+w*j+x*m+y*s;c[7]=v*f+w*k+x*n+y*a;c[8]=z*d+C*h+D*l+E*p;c[9]=z*e+C*i+D*o+E*r;c[10]=z*$/;"	f
+mat4.multiplyVec3	vendor/assets/javascripts/gl-matrix.js	/^g+C*j+D*m+E*s;c[11]=z*f+C*k+D*n+E*a;c[12]=q*d+F*h+G*l+b*p;c[13]=q*e+F*i+G*o+b*r;c[14]=q*g+F*j+G*m+b*s;c[15]=q*f+F*k+G*n+b*a;return c};mat4.multiplyVec3=function(a,b,c){c||(c=b);var d=b[0],e=b[1];b=b[2];c[0]=a[0]*d+a[4]*e+a[8]*b+a[12];c[1]=a[1]*d+a[5]*e+a[9]*b+a[13];c[2]=a[2]*d+a[6]*e+a[10]*b+a[14];return c};$/;"	f
+mat4.multiplyVec4	vendor/assets/javascripts/gl-matrix.js	/^mat4.multiplyVec4=function(a,b,c){c||(c=b);var d=b[0],e=b[1],g=b[2];b=b[3];c[0]=a[0]*d+a[4]*e+a[8]*g+a[12]*b;c[1]=a[1]*d+a[5]*e+a[9]*g+a[13]*b;c[2]=a[2]*d+a[6]*e+a[10]*g+a[14]*b;c[3]=a[3]*d+a[7]*e+a[11]*g+a[15]*b;return c};$/;"	f
+mat4.ortho	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.ortho = function (out, left, right, bottom, top, near, far) {$/;"	f
+mat4.ortho	vendor/assets/javascripts/gl-matrix.js	/^mat4.ortho=function(a,b,c,d,e,g,f){f||(f=mat4.create());var h=b-a,i=d-c,j=g-e;f[0]=2\/h;f[1]=0;f[2]=0;f[3]=0;f[4]=0;f[5]=2\/i;f[6]=0;f[7]=0;f[8]=0;f[9]=0;f[10]=-2\/j;f[11]=0;f[12]=-(a+b)\/h;f[13]=-(d+c)\/i;f[14]=-(g+e)\/j;f[15]=1;return f};$/;"	f
+mat4.perspective	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.perspective = function (out, fovy, aspect, near, far) {$/;"	f
+mat4.perspective	vendor/assets/javascripts/gl-matrix.js	/^mat4.frustum=function(a,b,c,d,e,g,f){f||(f=mat4.create());var h=b-a,i=d-c,j=g-e;f[0]=e*2\/h;f[1]=0;f[2]=0;f[3]=0;f[4]=0;f[5]=e*2\/i;f[6]=0;f[7]=0;f[8]=(b+a)\/h;f[9]=(d+c)\/i;f[10]=-(g+e)\/j;f[11]=-1;f[12]=0;f[13]=0;f[14]=-(g*e*2)\/j;f[15]=0;return f};mat4.perspective=function(a,b,c,d,e){a=c*Math.tan(a*Math.PI\/360);b=a*b;return mat4.frustum(-b,b,-a,a,c,d,e)};$/;"	f
+mat4.rotate	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.rotate = function (out, a, rad, axis) {$/;"	f
+mat4.rotateX	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.rotateX = function (out, a, rad) {$/;"	f
+mat4.rotateY	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.rotateY = function (out, a, rad) {$/;"	f
+mat4.rotateZ	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.rotateZ = function (out, a, rad) {$/;"	f
+mat4.scale	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.scale = function(out, a, v) {$/;"	f
+mat4.scale	vendor/assets/javascripts/gl-matrix.js	/^mat4.scale=function(a,b,c){var d=b[0],e=b[1];b=b[2];if(!c||a==c){a[0]*=d;a[1]*=d;a[2]*=d;a[3]*=d;a[4]*=e;a[5]*=e;a[6]*=e;a[7]*=e;a[8]*=b;a[9]*=b;a[10]*=b;a[11]*=b;return a}c[0]=a[0]*d;c[1]=a[1]*d;c[2]=a[2]*d;c[3]=a[3]*d;c[4]=a[4]*e;c[5]=a[5]*e;c[6]=a[6]*e;c[7]=a[7]*e;c[8]=a[8]*b;c[9]=a[9]*b;c[10]=a[10]*b;c[11]=a[11]*b;c[12]=a[12];c[13]=a[13];c[14]=a[14];c[15]=a[15];return c};$/;"	f
+mat4.set	vendor/assets/javascripts/gl-matrix.js	/^mat4.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];b[9]=a[9];b[10]=a[10];b[11]=a[11];b[12]=a[12];b[13]=a[13];b[14]=a[14];b[15]=a[15];return b};mat4.identity=function(a){a[0]=1;a[1]=0;a[2]=0;a[3]=0;a[4]=0;a[5]=1;a[6]=0;a[7]=0;a[8]=0;a[9]=0;a[10]=1;a[11]=0;a[12]=0;a[13]=0;a[14]=0;a[15]=1;return a};$/;"	f
+mat4.str	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.str = function (a) {$/;"	f
+mat4.str	vendor/assets/javascripts/gl-matrix.js	/^o;d[10]=b;d[11]=0;d[12]=-(k*e+i*g+f*a);d[13]=-(h*e+l*g+o*a);d[14]=-(c*e+j*g+b*a);d[15]=1;return d};mat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+", "+a[4]+", "+a[5]+", "+a[6]+", "+a[7]+", "+a[8]+", "+a[9]+", "+a[10]+", "+a[11]+", "+a[12]+", "+a[13]+", "+a[14]+", "+a[15]+"]"};quat4={};quat4.create=function(a){var b=new glMatrixArrayType(4);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3]}return b};quat4.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];return b};$/;"	f
+mat4.toInverseMat3	vendor/assets/javascripts/gl-matrix.js	/^mat4.toMat3=function(a,b){b||(b=mat3.create());b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[4];b[4]=a[5];b[5]=a[6];b[6]=a[8];b[7]=a[9];b[8]=a[10];return b};mat4.toInverseMat3=function(a,b){var c=a[0],d=a[1],e=a[2],g=a[4],f=a[5],h=a[6],i=a[8],j=a[9],k=a[10],l=k*f-h*j,o=-k*g+h*i,m=j*g-f*i,n=c*l+d*o+e*m;if(!n)return null;n=1\/n;b||(b=mat3.create());b[0]=l*n;b[1]=(-k*d+e*j)*n;b[2]=(h*d-e*f)*n;b[3]=o*n;b[4]=(k*c-e*i)*n;b[5]=(-h*c+e*g)*n;b[6]=m*n;b[7]=(-j*c+d*i)*n;b[8]=(f*c-d*g)*n;return b};$/;"	f
+mat4.toMat3	vendor/assets/javascripts/gl-matrix.js	/^mat4.toMat3=function(a,b){b||(b=mat3.create());b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[4];b[4]=a[5];b[5]=a[6];b[6]=a[8];b[7]=a[9];b[8]=a[10];return b};mat4.toInverseMat3=function(a,b){var c=a[0],d=a[1],e=a[2],g=a[4],f=a[5],h=a[6],i=a[8],j=a[9],k=a[10],l=k*f-h*j,o=-k*g+h*i,m=j*g-f*i,n=c*l+d*o+e*m;if(!n)return null;n=1\/n;b||(b=mat3.create());b[0]=l*n;b[1]=(-k*d+e*j)*n;b[2]=(h*d-e*f)*n;b[3]=o*n;b[4]=(k*c-e*i)*n;b[5]=(-h*c+e*g)*n;b[6]=m*n;b[7]=(-j*c+d*i)*n;b[8]=(f*c-d*g)*n;return b};$/;"	f
+mat4.toRotationMat	vendor/assets/javascripts/gl-matrix.js	/^b[9]=(-c*D+d*z-g*x)*q;b[10]=(n*v-p*t+s*A)*q;b[11]=(-k*v+l*t-m*A)*q;b[12]=(-f*C+h*y-i*x)*q;b[13]=(c*C-d*y+e*x)*q;b[14]=(-n*u+p*B-r*A)*q;b[15]=(k*u-l*B+o*A)*q;return b};mat4.toRotationMat=function(a,b){b||(b=mat4.create());b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];b[4]=a[4];b[5]=a[5];b[6]=a[6];b[7]=a[7];b[8]=a[8];b[9]=a[9];b[10]=a[10];b[11]=a[11];b[12]=0;b[13]=0;b[14]=0;b[15]=1;return b};$/;"	f
+mat4.translate	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.translate = function (out, a, v) {$/;"	f
+mat4.translate	vendor/assets/javascripts/gl-matrix.js	/^mat4.translate=function(a,b,c){var d=b[0],e=b[1];b=b[2];if(!c||a==c){a[12]=a[0]*d+a[4]*e+a[8]*b+a[12];a[13]=a[1]*d+a[5]*e+a[9]*b+a[13];a[14]=a[2]*d+a[6]*e+a[10]*b+a[14];a[15]=a[3]*d+a[7]*e+a[11]*b+a[15];return a}var g=a[0],f=a[1],h=a[2],i=a[3],j=a[4],k=a[5],l=a[6],o=a[7],m=a[8],n=a[9],p=a[10],r=a[11];c[0]=g;c[1]=f;c[2]=h;c[3]=i;c[4]=j;c[5]=k;c[6]=l;c[7]=o;c[8]=m;c[9]=n;c[10]=p;c[11]=r;c[12]=g*d+j*e+m*b+a[12];c[13]=f*d+k*e+n*b+a[13];c[14]=h*d+l*e+p*b+a[14];c[15]=i*d+o*e+r*b+a[15];return c};$/;"	f
+mat4.transpose	vendor/assets/javascripts/gl-matrix-2.js	/^mat4.transpose = function(out, a) {$/;"	f
+mat4.transpose	vendor/assets/javascripts/gl-matrix.js	/^mat4.transpose=function(a,b){if(!b||a==b){var c=a[1],d=a[2],e=a[3],g=a[6],f=a[7],h=a[11];a[1]=a[4];a[2]=a[8];a[3]=a[12];a[4]=c;a[6]=a[9];a[7]=a[13];a[8]=d;a[9]=g;a[11]=a[14];a[12]=e;a[13]=f;a[14]=h;return a}b[0]=a[0];b[1]=a[4];b[2]=a[8];b[3]=a[12];b[4]=a[1];b[5]=a[5];b[6]=a[9];b[7]=a[13];b[8]=a[2];b[9]=a[6];b[10]=a[10];b[11]=a[14];b[12]=a[3];b[13]=a[7];b[14]=a[11];b[15]=a[15];return b};$/;"	f
+proto	app/assets/javascripts/editor.js	/^  var proto = MinecraftEditor.Program.prototype;$/;"	v
+proto.drawScene	app/assets/javascripts/editor.js	/^  proto.drawScene = function() {$/;"	c
+proto.init	app/assets/javascripts/editor.js	/^  proto.init = function() {$/;"	c
+proto.initBuffers	app/assets/javascripts/editor.js	/^  proto.initBuffers = function() {$/;"	c
+proto.initShaders	app/assets/javascripts/editor.js	/^  proto.initShaders = function() {$/;"	c
+proto.setMatrixUniforms	app/assets/javascripts/editor.js	/^  proto.setMatrixUniforms = function() {$/;"	f
+proto.start	app/assets/javascripts/editor.js	/^  proto.start = function() {$/;"	c
+quat.calculateW	vendor/assets/javascripts/gl-matrix-2.js	/^quat.calculateW = function (out, a) {$/;"	f
+quat.conjugate	vendor/assets/javascripts/gl-matrix-2.js	/^quat.conjugate = function (out, a) {$/;"	f
+quat.create	vendor/assets/javascripts/gl-matrix-2.js	/^quat.create = function() {$/;"	f
+quat.identity	vendor/assets/javascripts/gl-matrix-2.js	/^quat.identity = function(out) {$/;"	f
+quat.invert	vendor/assets/javascripts/gl-matrix-2.js	/^quat.invert = function(out, a) {$/;"	f
+quat.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^quat.multiply = function(out, a, b) {$/;"	f
+quat.rotateX	vendor/assets/javascripts/gl-matrix-2.js	/^quat.rotateX = function (out, a, rad) {$/;"	f
+quat.rotateY	vendor/assets/javascripts/gl-matrix-2.js	/^quat.rotateY = function (out, a, rad) {$/;"	f
+quat.rotateZ	vendor/assets/javascripts/gl-matrix-2.js	/^quat.rotateZ = function (out, a, rad) {$/;"	f
+quat.setAxisAngle	vendor/assets/javascripts/gl-matrix-2.js	/^quat.setAxisAngle = function(out, axis, rad) {$/;"	f
+quat.slerp	vendor/assets/javascripts/gl-matrix-2.js	/^quat.slerp = function (out, a, b, t) {$/;"	f
+quat.str	vendor/assets/javascripts/gl-matrix-2.js	/^quat.str = function (a) {$/;"	f
+quat4.calculateW	vendor/assets/javascripts/gl-matrix.js	/^quat4.calculateW=function(a,b){var c=a[0],d=a[1],e=a[2];if(!b||a==b){a[3]=-Math.sqrt(Math.abs(1-c*c-d*d-e*e));return a}b[0]=c;b[1]=d;b[2]=e;b[3]=-Math.sqrt(Math.abs(1-c*c-d*d-e*e));return b};quat4.inverse=function(a,b){if(!b||a==b){a[0]*=1;a[1]*=1;a[2]*=1;return a}b[0]=-a[0];b[1]=-a[1];b[2]=-a[2];b[3]=a[3];return b};quat4.length=function(a){var b=a[0],c=a[1],d=a[2];a=a[3];return Math.sqrt(b*b+c*c+d*d+a*a)};$/;"	f
+quat4.inverse	vendor/assets/javascripts/gl-matrix.js	/^quat4.calculateW=function(a,b){var c=a[0],d=a[1],e=a[2];if(!b||a==b){a[3]=-Math.sqrt(Math.abs(1-c*c-d*d-e*e));return a}b[0]=c;b[1]=d;b[2]=e;b[3]=-Math.sqrt(Math.abs(1-c*c-d*d-e*e));return b};quat4.inverse=function(a,b){if(!b||a==b){a[0]*=1;a[1]*=1;a[2]*=1;return a}b[0]=-a[0];b[1]=-a[1];b[2]=-a[2];b[3]=a[3];return b};quat4.length=function(a){var b=a[0],c=a[1],d=a[2];a=a[3];return Math.sqrt(b*b+c*c+d*d+a*a)};$/;"	f
+quat4.length	vendor/assets/javascripts/gl-matrix.js	/^quat4.calculateW=function(a,b){var c=a[0],d=a[1],e=a[2];if(!b||a==b){a[3]=-Math.sqrt(Math.abs(1-c*c-d*d-e*e));return a}b[0]=c;b[1]=d;b[2]=e;b[3]=-Math.sqrt(Math.abs(1-c*c-d*d-e*e));return b};quat4.inverse=function(a,b){if(!b||a==b){a[0]*=1;a[1]*=1;a[2]*=1;return a}b[0]=-a[0];b[1]=-a[1];b[2]=-a[2];b[3]=a[3];return b};quat4.length=function(a){var b=a[0],c=a[1],d=a[2];a=a[3];return Math.sqrt(b*b+c*c+d*d+a*a)};$/;"	f
+quat4.multiply	vendor/assets/javascripts/gl-matrix.js	/^quat4.normalize=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=a[3],f=Math.sqrt(c*c+d*d+e*e+g*g);if(f==0){b[0]=0;b[1]=0;b[2]=0;b[3]=0;return b}f=1\/f;b[0]=c*f;b[1]=d*f;b[2]=e*f;b[3]=g*f;return b};quat4.multiply=function(a,b,c){c||(c=a);var d=a[0],e=a[1],g=a[2];a=a[3];var f=b[0],h=b[1],i=b[2];b=b[3];c[0]=d*b+a*f+e*i-g*h;c[1]=e*b+a*h+g*f-d*i;c[2]=g*b+a*i+d*h-e*f;c[3]=a*b-d*f-e*h-g*i;return c};$/;"	f
+quat4.multiplyVec3	vendor/assets/javascripts/gl-matrix.js	/^quat4.multiplyVec3=function(a,b,c){c||(c=b);var d=b[0],e=b[1],g=b[2];b=a[0];var f=a[1],h=a[2];a=a[3];var i=a*d+f*g-h*e,j=a*e+h*d-b*g,k=a*g+b*e-f*d;d=-b*d-f*e-h*g;c[0]=i*a+d*-b+j*-h-k*-f;c[1]=j*a+d*-f+k*-b-i*-h;c[2]=k*a+d*-h+i*-f-j*-b;return c};quat4.toMat3=function(a,b){b||(b=mat3.create());var c=a[0],d=a[1],e=a[2],g=a[3],f=c+c,h=d+d,i=e+e,j=c*f,k=c*h;c=c*i;var l=d*h;d=d*i;e=e*i;f=g*f;h=g*h;g=g*i;b[0]=1-(l+e);b[1]=k-g;b[2]=c+h;b[3]=k+g;b[4]=1-(j+e);b[5]=d-f;b[6]=c-h;b[7]=d+f;b[8]=1-(j+l);return b};$/;"	f
+quat4.normalize	vendor/assets/javascripts/gl-matrix.js	/^quat4.normalize=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=a[3],f=Math.sqrt(c*c+d*d+e*e+g*g);if(f==0){b[0]=0;b[1]=0;b[2]=0;b[3]=0;return b}f=1\/f;b[0]=c*f;b[1]=d*f;b[2]=e*f;b[3]=g*f;return b};quat4.multiply=function(a,b,c){c||(c=a);var d=a[0],e=a[1],g=a[2];a=a[3];var f=b[0],h=b[1],i=b[2];b=b[3];c[0]=d*b+a*f+e*i-g*h;c[1]=e*b+a*h+g*f-d*i;c[2]=g*b+a*i+d*h-e*f;c[3]=a*b-d*f-e*h-g*i;return c};$/;"	f
+quat4.set	vendor/assets/javascripts/gl-matrix.js	/^o;d[10]=b;d[11]=0;d[12]=-(k*e+i*g+f*a);d[13]=-(h*e+l*g+o*a);d[14]=-(c*e+j*g+b*a);d[15]=1;return d};mat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+", "+a[4]+", "+a[5]+", "+a[6]+", "+a[7]+", "+a[8]+", "+a[9]+", "+a[10]+", "+a[11]+", "+a[12]+", "+a[13]+", "+a[14]+", "+a[15]+"]"};quat4={};quat4.create=function(a){var b=new glMatrixArrayType(4);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3]}return b};quat4.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];b[3]=a[3];return b};$/;"	f
+quat4.slerp	vendor/assets/javascripts/gl-matrix.js	/^quat4.toMat4=function(a,b){b||(b=mat4.create());var c=a[0],d=a[1],e=a[2],g=a[3],f=c+c,h=d+d,i=e+e,j=c*f,k=c*h;c=c*i;var l=d*h;d=d*i;e=e*i;f=g*f;h=g*h;g=g*i;b[0]=1-(l+e);b[1]=k-g;b[2]=c+h;b[3]=0;b[4]=k+g;b[5]=1-(j+e);b[6]=d-f;b[7]=0;b[8]=c-h;b[9]=d+f;b[10]=1-(j+l);b[11]=0;b[12]=0;b[13]=0;b[14]=0;b[15]=1;return b};quat4.slerp=function(a,b,c,d){d||(d=a);var e=c;if(a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3]<0)e=-1*c;d[0]=1-c*a[0]+e*b[0];d[1]=1-c*a[1]+e*b[1];d[2]=1-c*a[2]+e*b[2];d[3]=1-c*a[3]+e*b[3];return d};$/;"	f
+quat4.str	vendor/assets/javascripts/gl-matrix.js	/^quat4.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+", "+a[3]+"]"};$/;"	f
+quat4.toMat3	vendor/assets/javascripts/gl-matrix.js	/^quat4.multiplyVec3=function(a,b,c){c||(c=b);var d=b[0],e=b[1],g=b[2];b=a[0];var f=a[1],h=a[2];a=a[3];var i=a*d+f*g-h*e,j=a*e+h*d-b*g,k=a*g+b*e-f*d;d=-b*d-f*e-h*g;c[0]=i*a+d*-b+j*-h-k*-f;c[1]=j*a+d*-f+k*-b-i*-h;c[2]=k*a+d*-h+i*-f-j*-b;return c};quat4.toMat3=function(a,b){b||(b=mat3.create());var c=a[0],d=a[1],e=a[2],g=a[3],f=c+c,h=d+d,i=e+e,j=c*f,k=c*h;c=c*i;var l=d*h;d=d*i;e=e*i;f=g*f;h=g*h;g=g*i;b[0]=1-(l+e);b[1]=k-g;b[2]=c+h;b[3]=k+g;b[4]=1-(j+e);b[5]=d-f;b[6]=c-h;b[7]=d+f;b[8]=1-(j+l);return b};$/;"	f
+quat4.toMat4	vendor/assets/javascripts/gl-matrix.js	/^quat4.toMat4=function(a,b){b||(b=mat4.create());var c=a[0],d=a[1],e=a[2],g=a[3],f=c+c,h=d+d,i=e+e,j=c*f,k=c*h;c=c*i;var l=d*h;d=d*i;e=e*i;f=g*f;h=g*h;g=g*i;b[0]=1-(l+e);b[1]=k-g;b[2]=c+h;b[3]=0;b[4]=k+g;b[5]=1-(j+e);b[6]=d-f;b[7]=0;b[8]=c-h;b[9]=d+f;b[10]=1-(j+l);b[11]=0;b[12]=0;b[13]=0;b[14]=0;b[15]=1;return b};quat4.slerp=function(a,b,c,d){d||(d=a);var e=c;if(a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3]<0)e=-1*c;d[0]=1-c*a[0]+e*b[0];d[1]=1-c*a[1]+e*b[1];d[2]=1-c*a[2]+e*b[2];d[3]=1-c*a[3]+e*b[3];return d};$/;"	f
+test_homepage	test/performance/browsing_test.rb	/^  def test_homepage$/;"	f	class:BrowsingTest
+vec2.add	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.add = function(out, a, b) {$/;"	f
+vec2.clone	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.clone = function(a) {$/;"	f
+vec2.copy	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.copy = function(out, a) {$/;"	f
+vec2.create	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.create = function() {$/;"	f
+vec2.cross	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.cross = function(out, a, b) {$/;"	f
+vec2.distance	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.distance = function(a, b) {$/;"	f
+vec2.divide	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.divide = function(out, a, b) {$/;"	f
+vec2.dot	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.dot = function (a, b) {$/;"	f
+vec2.fromValues	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.fromValues = function(x, y) {$/;"	f
+vec2.length	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.length = function (a) {$/;"	f
+vec2.lerp	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.lerp = function (out, a, b, t) {$/;"	f
+vec2.max	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.max = function(out, a, b) {$/;"	f
+vec2.min	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.min = function(out, a, b) {$/;"	f
+vec2.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.multiply = function(out, a, b) {$/;"	f
+vec2.negate	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.negate = function(out, a) {$/;"	f
+vec2.normalize	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.normalize = function(out, a) {$/;"	f
+vec2.scale	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.scale = function(out, a, b) {$/;"	f
+vec2.set	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.set = function(out, x, y) {$/;"	f
+vec2.squaredDistance	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.squaredDistance = function(a, b) {$/;"	f
+vec2.squaredLength	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.squaredLength = function (a) {$/;"	f
+vec2.str	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.str = function (a) {$/;"	f
+vec2.subtract	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.subtract = function(out, a, b) {$/;"	f
+vec2.transformMat2	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.transformMat2 = function(out, a, m) {$/;"	f
+vec2.transformMat2d	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.transformMat2d = function(out, a, m) {$/;"	f
+vec2.transformMat3	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.transformMat3 = function(out, a, m) {$/;"	f
+vec2.transformMat4	vendor/assets/javascripts/gl-matrix-2.js	/^vec2.transformMat4 = function(out, a, m) {$/;"	f
+vec3.add	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.add = function(out, a, b) {$/;"	f
+vec3.add	vendor/assets/javascripts/gl-matrix.js	/^glMatrixArrayType=typeof Float32Array!="undefined"?Float32Array:typeof WebGLFloatArray!="undefined"?WebGLFloatArray:Array;var vec3={};vec3.create=function(a){var b=new glMatrixArrayType(3);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2]}return b};vec3.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];return b};vec3.add=function(a,b,c){if(!c||a==c){a[0]+=b[0];a[1]+=b[1];a[2]+=b[2];return a}c[0]=a[0]+b[0];c[1]=a[1]+b[1];c[2]=a[2]+b[2];return c};$/;"	f
+vec3.clone	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.clone = function(a) {$/;"	f
+vec3.copy	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.copy = function(out, a) {$/;"	f
+vec3.create	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.create = function() {$/;"	f
+vec3.cross	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.cross = function(out, a, b) {$/;"	f
+vec3.cross	vendor/assets/javascripts/gl-matrix.js	/^vec3.normalize=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=Math.sqrt(c*c+d*d+e*e);if(g){if(g==1){b[0]=c;b[1]=d;b[2]=e;return b}}else{b[0]=0;b[1]=0;b[2]=0;return b}g=1\/g;b[0]=c*g;b[1]=d*g;b[2]=e*g;return b};vec3.cross=function(a,b,c){c||(c=a);var d=a[0],e=a[1];a=a[2];var g=b[0],f=b[1];b=b[2];c[0]=e*b-a*f;c[1]=a*g-d*b;c[2]=d*f-e*g;return c};vec3.length=function(a){var b=a[0],c=a[1];a=a[2];return Math.sqrt(b*b+c*c+a*a)};vec3.dot=function(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]};$/;"	f
+vec3.direction	vendor/assets/javascripts/gl-matrix.js	/^vec3.direction=function(a,b,c){c||(c=a);var d=a[0]-b[0],e=a[1]-b[1];a=a[2]-b[2];b=Math.sqrt(d*d+e*e+a*a);if(!b){c[0]=0;c[1]=0;c[2]=0;return c}b=1\/b;c[0]=d*b;c[1]=e*b;c[2]=a*b;return c};vec3.lerp=function(a,b,c,d){d||(d=a);d[0]=a[0]+c*(b[0]-a[0]);d[1]=a[1]+c*(b[1]-a[1]);d[2]=a[2]+c*(b[2]-a[2]);return d};vec3.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+"]"};var mat3={};$/;"	f
+vec3.distance	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.distance = function(a, b) {$/;"	f
+vec3.divide	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.divide = function(out, a, b) {$/;"	f
+vec3.dot	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.dot = function (a, b) {$/;"	f
+vec3.dot	vendor/assets/javascripts/gl-matrix.js	/^vec3.normalize=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=Math.sqrt(c*c+d*d+e*e);if(g){if(g==1){b[0]=c;b[1]=d;b[2]=e;return b}}else{b[0]=0;b[1]=0;b[2]=0;return b}g=1\/g;b[0]=c*g;b[1]=d*g;b[2]=e*g;return b};vec3.cross=function(a,b,c){c||(c=a);var d=a[0],e=a[1];a=a[2];var g=b[0],f=b[1];b=b[2];c[0]=e*b-a*f;c[1]=a*g-d*b;c[2]=d*f-e*g;return c};vec3.length=function(a){var b=a[0],c=a[1];a=a[2];return Math.sqrt(b*b+c*c+a*a)};vec3.dot=function(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]};$/;"	f
+vec3.fromValues	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.fromValues = function(x, y, z) {$/;"	f
+vec3.length	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.length = function (a) {$/;"	f
+vec3.length	vendor/assets/javascripts/gl-matrix.js	/^vec3.normalize=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=Math.sqrt(c*c+d*d+e*e);if(g){if(g==1){b[0]=c;b[1]=d;b[2]=e;return b}}else{b[0]=0;b[1]=0;b[2]=0;return b}g=1\/g;b[0]=c*g;b[1]=d*g;b[2]=e*g;return b};vec3.cross=function(a,b,c){c||(c=a);var d=a[0],e=a[1];a=a[2];var g=b[0],f=b[1];b=b[2];c[0]=e*b-a*f;c[1]=a*g-d*b;c[2]=d*f-e*g;return c};vec3.length=function(a){var b=a[0],c=a[1];a=a[2];return Math.sqrt(b*b+c*c+a*a)};vec3.dot=function(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]};$/;"	f
+vec3.lerp	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.lerp = function (out, a, b, t) {$/;"	f
+vec3.lerp	vendor/assets/javascripts/gl-matrix.js	/^vec3.direction=function(a,b,c){c||(c=a);var d=a[0]-b[0],e=a[1]-b[1];a=a[2]-b[2];b=Math.sqrt(d*d+e*e+a*a);if(!b){c[0]=0;c[1]=0;c[2]=0;return c}b=1\/b;c[0]=d*b;c[1]=e*b;c[2]=a*b;return c};vec3.lerp=function(a,b,c,d){d||(d=a);d[0]=a[0]+c*(b[0]-a[0]);d[1]=a[1]+c*(b[1]-a[1]);d[2]=a[2]+c*(b[2]-a[2]);return d};vec3.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+"]"};var mat3={};$/;"	f
+vec3.max	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.max = function(out, a, b) {$/;"	f
+vec3.min	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.min = function(out, a, b) {$/;"	f
+vec3.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.multiply = function(out, a, b) {$/;"	f
+vec3.negate	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.negate = function(out, a) {$/;"	f
+vec3.negate	vendor/assets/javascripts/gl-matrix.js	/^vec3.subtract=function(a,b,c){if(!c||a==c){a[0]-=b[0];a[1]-=b[1];a[2]-=b[2];return a}c[0]=a[0]-b[0];c[1]=a[1]-b[1];c[2]=a[2]-b[2];return c};vec3.negate=function(a,b){b||(b=a);b[0]=-a[0];b[1]=-a[1];b[2]=-a[2];return b};vec3.scale=function(a,b,c){if(!c||a==c){a[0]*=b;a[1]*=b;a[2]*=b;return a}c[0]=a[0]*b;c[1]=a[1]*b;c[2]=a[2]*b;return c};$/;"	f
+vec3.normalize	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.normalize = function(out, a) {$/;"	f
+vec3.normalize	vendor/assets/javascripts/gl-matrix.js	/^vec3.normalize=function(a,b){b||(b=a);var c=a[0],d=a[1],e=a[2],g=Math.sqrt(c*c+d*d+e*e);if(g){if(g==1){b[0]=c;b[1]=d;b[2]=e;return b}}else{b[0]=0;b[1]=0;b[2]=0;return b}g=1\/g;b[0]=c*g;b[1]=d*g;b[2]=e*g;return b};vec3.cross=function(a,b,c){c||(c=a);var d=a[0],e=a[1];a=a[2];var g=b[0],f=b[1];b=b[2];c[0]=e*b-a*f;c[1]=a*g-d*b;c[2]=d*f-e*g;return c};vec3.length=function(a){var b=a[0],c=a[1];a=a[2];return Math.sqrt(b*b+c*c+a*a)};vec3.dot=function(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]};$/;"	f
+vec3.scale	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.scale = function(out, a, b) {$/;"	f
+vec3.scale	vendor/assets/javascripts/gl-matrix.js	/^vec3.subtract=function(a,b,c){if(!c||a==c){a[0]-=b[0];a[1]-=b[1];a[2]-=b[2];return a}c[0]=a[0]-b[0];c[1]=a[1]-b[1];c[2]=a[2]-b[2];return c};vec3.negate=function(a,b){b||(b=a);b[0]=-a[0];b[1]=-a[1];b[2]=-a[2];return b};vec3.scale=function(a,b,c){if(!c||a==c){a[0]*=b;a[1]*=b;a[2]*=b;return a}c[0]=a[0]*b;c[1]=a[1]*b;c[2]=a[2]*b;return c};$/;"	f
+vec3.set	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.set = function(out, x, y, z) {$/;"	f
+vec3.set	vendor/assets/javascripts/gl-matrix.js	/^glMatrixArrayType=typeof Float32Array!="undefined"?Float32Array:typeof WebGLFloatArray!="undefined"?WebGLFloatArray:Array;var vec3={};vec3.create=function(a){var b=new glMatrixArrayType(3);if(a){b[0]=a[0];b[1]=a[1];b[2]=a[2]}return b};vec3.set=function(a,b){b[0]=a[0];b[1]=a[1];b[2]=a[2];return b};vec3.add=function(a,b,c){if(!c||a==c){a[0]+=b[0];a[1]+=b[1];a[2]+=b[2];return a}c[0]=a[0]+b[0];c[1]=a[1]+b[1];c[2]=a[2]+b[2];return c};$/;"	f
+vec3.squaredDistance	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.squaredDistance = function(a, b) {$/;"	f
+vec3.squaredLength	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.squaredLength = function (a) {$/;"	f
+vec3.str	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.str = function (a) {$/;"	f
+vec3.str	vendor/assets/javascripts/gl-matrix.js	/^vec3.direction=function(a,b,c){c||(c=a);var d=a[0]-b[0],e=a[1]-b[1];a=a[2]-b[2];b=Math.sqrt(d*d+e*e+a*a);if(!b){c[0]=0;c[1]=0;c[2]=0;return c}b=1\/b;c[0]=d*b;c[1]=e*b;c[2]=a*b;return c};vec3.lerp=function(a,b,c,d){d||(d=a);d[0]=a[0]+c*(b[0]-a[0]);d[1]=a[1]+c*(b[1]-a[1]);d[2]=a[2]+c*(b[2]-a[2]);return d};vec3.str=function(a){return"["+a[0]+", "+a[1]+", "+a[2]+"]"};var mat3={};$/;"	f
+vec3.subtract	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.subtract = function(out, a, b) {$/;"	f
+vec3.subtract	vendor/assets/javascripts/gl-matrix.js	/^vec3.subtract=function(a,b,c){if(!c||a==c){a[0]-=b[0];a[1]-=b[1];a[2]-=b[2];return a}c[0]=a[0]-b[0];c[1]=a[1]-b[1];c[2]=a[2]-b[2];return c};vec3.negate=function(a,b){b||(b=a);b[0]=-a[0];b[1]=-a[1];b[2]=-a[2];return b};vec3.scale=function(a,b,c){if(!c||a==c){a[0]*=b;a[1]*=b;a[2]*=b;return a}c[0]=a[0]*b;c[1]=a[1]*b;c[2]=a[2]*b;return c};$/;"	f
+vec3.transformMat4	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.transformMat4 = function(out, a, m) {$/;"	f
+vec3.transformQuat	vendor/assets/javascripts/gl-matrix-2.js	/^vec3.transformQuat = function(out, a, q) {$/;"	f
+vec4.add	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.add = function(out, a, b) {$/;"	f
+vec4.clone	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.clone = function(a) {$/;"	f
+vec4.copy	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.copy = function(out, a) {$/;"	f
+vec4.create	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.create = function() {$/;"	f
+vec4.distance	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.distance = function(a, b) {$/;"	f
+vec4.divide	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.divide = function(out, a, b) {$/;"	f
+vec4.dot	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.dot = function (a, b) {$/;"	f
+vec4.fromValues	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.fromValues = function(x, y, z, w) {$/;"	f
+vec4.length	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.length = function (a) {$/;"	f
+vec4.lerp	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.lerp = function (out, a, b, t) {$/;"	f
+vec4.max	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.max = function(out, a, b) {$/;"	f
+vec4.min	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.min = function(out, a, b) {$/;"	f
+vec4.multiply	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.multiply = function(out, a, b) {$/;"	f
+vec4.negate	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.negate = function(out, a) {$/;"	f
+vec4.normalize	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.normalize = function(out, a) {$/;"	f
+vec4.scale	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.scale = function(out, a, b) {$/;"	f
+vec4.set	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.set = function(out, x, y, z, w) {$/;"	f
+vec4.squaredDistance	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.squaredDistance = function(a, b) {$/;"	f
+vec4.squaredLength	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.squaredLength = function (a) {$/;"	f
+vec4.str	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.str = function (a) {$/;"	f
+vec4.subtract	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.subtract = function(out, a, b) {$/;"	f
+vec4.transformMat4	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.transformMat4 = function(out, a, m) {$/;"	f
+vec4.transformQuat	vendor/assets/javascripts/gl-matrix-2.js	/^vec4.transformQuat = function(out, a, q) {$/;"	f
