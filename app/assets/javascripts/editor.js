@@ -17,9 +17,34 @@ var MinecraftEditor = MinecraftEditor || {};
 
   proto.start = function() {
     GL.init(this.canvas);
+    this.blockType = 0;
+    this.initKeyboard();
     this.initShaders();
     this.initBuffers();
+    this.initTextures();
     this.tick();
+  };
+
+  proto.initKeyboard = function() {
+    document.onkeyup = this.bind(this.handleKeyUp);
+  };
+
+  proto.handleKeyUp = function(event) {
+    var left = 37;
+    var right = 39;
+    if (event.keyCode === left) {
+      this.blockType -= 1;
+      if (this.blockType<0) {
+        this.blockType = 255;
+      }
+    };
+
+    if (event.keyCode === right) {
+      this.blockType += 1;
+      if (this.blockType>255) {
+        this.blockType = 0;
+      }
+    };
   };
 
   proto.tick = function() {
@@ -27,6 +52,26 @@ var MinecraftEditor = MinecraftEditor || {};
     this.drawScene();
     this.animate();
   };
+
+  proto.initTextures = function() {
+    var stoneTexture = GL.createTexture();
+    stoneTexture.image = new Image();
+    stoneTexture.image.onload = function() {
+      handleLoadedTexture(stoneTexture);
+    }
+
+    stoneTexture.image.src = "/assets/terrain.png";
+    this.stoneTexture = stoneTexture;
+  }
+
+  function handleLoadedTexture(texture) {
+    GL.bindTexture(GL.TEXTURE_2D, texture);
+    GL.pixelStorei(GL.UNPACK_FLIP_Y_WEBGL, true);
+    GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, texture.image);
+    GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
+    GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
+    GL.bindTexture(GL.TEXTURE_2D, null);
+  }
 
   proto.initShaders = function() {
     var fragmentShader = ShaderHelper.loadFragmentShader(MinecraftEditor.Shaders.fragmentShader);
@@ -38,11 +83,14 @@ var MinecraftEditor = MinecraftEditor || {};
     this.shaderProgram.vertexPositionAttribute = GL.getAttribLocation(this.shaderProgram, "aVertexPosition");
     GL.enableVertexAttribArray(this.shaderProgram.vertexPositionAttribute);
 
-    this.shaderProgram.vertexColorAttribute = GL.getAttribLocation(this.shaderProgram, "aVertexColor");
-    GL.enableVertexAttribArray(this.shaderProgram.vertexColorAttribute);
+    this.shaderProgram.textureCoordAttribute = GL.getAttribLocation(this.shaderProgram, "aTextureCoord");
+    GL.enableVertexAttribArray(this.shaderProgram.textureCoordAttribute);
 
     this.shaderProgram.pMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uPMatrix");
     this.shaderProgram.mvMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uMVMatrix");
+    this.shaderProgram.samplerUniform = GL.getUniformLocation(this.shaderProgram, "uSampler");
+    this.shaderProgram.textureOffsetX = GL.getUniformLocation(this.shaderProgram, "uTextureOffsetX");
+    this.shaderProgram.textureOffsetY = GL.getUniformLocation(this.shaderProgram, "uTextureOffsetY");
   };
 
   proto.setMatrixUniforms = function() {
@@ -50,59 +98,20 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.uniformMatrix4fv(this.shaderProgram.mvMatrixUniform, false, this.mvMatrix);
   };
 
+  proto.setTextureOffsetUniforms = function() {
+    var blockSize = 1.0/16;
+    var xOffset = this.blockType % 16 * blockSize;
+    GL.uniform1f(this.shaderProgram.textureOffsetX, xOffset);
+
+    var yOffset = ((this.blockType/16)|(this.blockType/16)) * blockSize;
+    GL.uniform1f(this.shaderProgram.textureOffsetY, yOffset);
+  };
+
   proto.initBuffers = function() {
-    // Pyramid
-    this.rPyramid = 0;
-    this.pyramidVertexPositionBuffer = GL.createBuffer();
-    GL.bindBuffer(GL.ARRAY_BUFFER, this.pyramidVertexPositionBuffer);
-    var vertices = [
-      // Front face
-      0.0,  1.0,  0.0,
-      -1.0, -1.0,  1.0,
-      1.0, -1.0,  1.0,
-      // Right face
-      0.0,  1.0,  0.0,
-      1.0, -1.0,  1.0,
-      1.0, -1.0, -1.0,
-      // Back face
-      0.0,  1.0,  0.0,
-      1.0, -1.0, -1.0,
-      -1.0, -1.0, -1.0,
-      // Left face
-      0.0,  1.0,  0.0,
-      -1.0, -1.0, -1.0,
-      -1.0, -1.0,  1.0
-    ];
-    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(vertices), GL.STATIC_DRAW);
-    this.pyramidVertexPositionBuffer.itemSize = 3;
-    this.pyramidVertexPositionBuffer.numItems = 12;
-
-    this.pyramidVertexColorBuffer = GL.createBuffer();
-    GL.bindBuffer(GL.ARRAY_BUFFER, this.pyramidVertexColorBuffer);
-    var colors = [
-      // Front face
-      1.0, 0.0, 0.0, 1.0,
-      0.0, 1.0, 0.0, 1.0,
-      0.0, 0.0, 1.0, 1.0,
-      // Right face
-      1.0, 0.0, 0.0, 1.0,
-      0.0, 0.0, 1.0, 1.0,
-      0.0, 1.0, 0.0, 1.0,
-      // Back face
-      1.0, 0.0, 0.0, 1.0,
-      0.0, 1.0, 0.0, 1.0,
-      0.0, 0.0, 1.0, 1.0,
-      // Left face
-      1.0, 0.0, 0.0, 1.0,
-      0.0, 0.0, 1.0, 1.0,
-      0.0, 1.0, 0.0, 1.0
-    ];
-    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(colors), GL.STATIC_DRAW);
-    this.pyramidVertexColorBuffer.itemSize = 4;
-    this.pyramidVertexColorBuffer.numItems = 12;
-
     // cube
-    this.rCube = 0;
+    this.xRot = 0;
+    this.yRot = 0;
+    this.zRot = 0;
     this.cubeVertexPositionBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     vertices = [
@@ -146,26 +155,52 @@ var MinecraftEditor = MinecraftEditor || {};
     this.cubeVertexPositionBuffer.itemSize = 3; 
     this.cubeVertexPositionBuffer.numItems = 24;
 
-    this.cubeVertexColorBuffer = GL.createBuffer();
-    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexColorBuffer);
-    colors = [
-      [1.0, 0.0, 0.0, 1.0], // Front face
-      [1.0, 1.0, 0.0, 1.0], // Back face
-      [0.0, 1.0, 0.0, 1.0], // Top face
-      [1.0, 0.5, 0.5, 1.0], // Bottom face
-      [1.0, 0.0, 1.0, 1.0], // Right face
-      [0.0, 0.0, 1.0, 1.0]  // Left face
+    this.cubeVertexTextureCoordBuffer = GL.createBuffer();
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
+
+    var blockSize = 1.0/16;
+
+    var textureCoords = [
+      // Front face
+      0.0, 0.0, 
+      blockSize, 0.0,
+      blockSize, blockSize,
+      0.0, blockSize,
+
+      // Back face
+      blockSize, 0.0, 
+      blockSize, blockSize,
+      0.0, blockSize,
+      0.0, 0.0,
+
+      // Top face
+      0.0, blockSize,
+      0.0, 0.0,
+      blockSize, 0.0,
+      blockSize, blockSize,
+
+      // Bottom face
+      blockSize, blockSize,
+      0.0, blockSize,
+      0.0, 0.0,
+      blockSize, 0.0,
+
+      // Right face
+      blockSize, 0.0,
+      blockSize, blockSize,
+      0.0, blockSize,
+      0.0, 0.0,
+
+      // Left face
+      0.0, 0.0,
+      blockSize, 0.0,
+      blockSize, blockSize,
+      0.0, blockSize,
     ];
-    var unpackedColors = [];
-    for (var i in colors) {
-      var color = colors[i];
-      for (var j=0; j < 4; j++) {
-        unpackedColors = unpackedColors.concat(color);
-      }
-    }
-    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(unpackedColors), GL.STATIC_DRAW);
-    this.cubeVertexColorBuffer.itemSize = 4;
-    this.cubeVertexColorBuffer.numItems = 24;
+    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(textureCoords), GL.STATIC_DRAW);
+    this.cubeVertexTextureCoordBuffer.itemSize = 2;
+    this.cubeVertexTextureCoordBuffer.numItems = 24;
+
 
     this.cubeVertexIndexBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.cubeVertexIndexBuffer);
@@ -194,39 +229,28 @@ var MinecraftEditor = MinecraftEditor || {};
 
     mat4.identity(this.mvMatrix);
 
-    mat4.translate(this.mvMatrix, [0.0, 0.0, -1.0]);
-
-    // pyramid
-    mat4.translate(this.mvMatrix, [-1.5, 0.0, -7.0]);
-    this.mvPushMatrix();
-    mat4.rotate(this.mvMatrix, degToRad(this.rPyramid), [0, 1, 0]);
-
-    GL.bindBuffer(GL.ARRAY_BUFFER, this.pyramidVertexPositionBuffer);
-    GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.pyramidVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
-
-    GL.bindBuffer(GL.ARRAY_BUFFER, this.pyramidVertexColorBuffer);
-    GL.vertexAttribPointer(this.shaderProgram.vertexColorAttribute, this.pyramidVertexColorBuffer.itemSize, GL.FLOAT, false, 0, 0);
-    this.setMatrixUniforms();
-    GL.drawArrays(GL.TRIANGLES, 0, this.pyramidVertexPositionBuffer.numItems);
-    this.mvPopMatrix();
+    mat4.translate(this.mvMatrix, [0.0, 0.0, -5.0]);
 
     // cube
-    mat4.translate(this.mvMatrix, [3.0, 0.0, 0.0]);
-    this.mvPushMatrix();
-    mat4.rotate(this.mvMatrix, degToRad(this.rCube), [1, 1, 1]);
+    mat4.rotate(this.mvMatrix, degToRad(this.xRot), [1, 0, 0]);
+    mat4.rotate(this.mvMatrix, degToRad(this.yRot), [0, 1, 0]);
+    mat4.rotate(this.mvMatrix, degToRad(this.zRot), [0, 0, 1]);
 
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexColorBuffer);
-    GL.vertexAttribPointer(this.shaderProgram.vertexColorAttribute, this.cubeVertexColorBuffer.itemSize, GL.FLOAT, false, 0, 0);
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
+    GL.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.cubeVertexTextureCoordBuffer.itemSize, GL.FLOAT, false, 0, 0);
+
+    GL.activeTexture(GL.TEXTURE0);
+    GL.bindTexture(GL.TEXTURE_2D, this.stoneTexture);
+    GL.uniform1i(this.shaderProgram.samplerUniform, 0);
+    this.setTextureOffsetUniforms();
+
 
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.cubeVertexIndexBuffer);
     this.setMatrixUniforms();
-
     GL.drawElements(GL.TRIANGLES, this.cubeVertexIndexBuffer.numItems, GL.UNSIGNED_SHORT, 0);
-
-    this.mvPopMatrix();
   }
 
   proto.animate = function() {
@@ -234,8 +258,9 @@ var MinecraftEditor = MinecraftEditor || {};
     if (this.lastTime != 0) {
       var elapsed = timeNow - this.lastTime;
 
-      this.rPyramid += (90 * elapsed) / 1000.0;
-      this.rCube -= (75 * elapsed) / 1000.0;
+      this.xRot += (90 * elapsed) / 1000.0;
+      this.yRot += (90 * elapsed) / 1000.0;
+      this.zRot += (90 * elapsed) / 1000.0;
     }
     this.lastTime = timeNow;
   };
