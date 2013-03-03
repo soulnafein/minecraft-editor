@@ -17,7 +17,7 @@ var MinecraftEditor = MinecraftEditor || {};
 
   proto.start = function() {
     GL.init(this.canvas);
-    this.blockType = 0;
+    this.blockType = 209;
     this.initKeyboard();
     this.initShaders();
     this.initBuffers();
@@ -83,12 +83,19 @@ var MinecraftEditor = MinecraftEditor || {};
     this.shaderProgram.vertexPositionAttribute = GL.getAttribLocation(this.shaderProgram, "aVertexPosition");
     GL.enableVertexAttribArray(this.shaderProgram.vertexPositionAttribute);
 
+    this.shaderProgram.vertexNormalAttribute = GL.getAttribLocation(this.shaderProgram, "aVertexNormal");
+    GL.enableVertexAttribArray(this.shaderProgram.vertexNormalAttribute);
+
     this.shaderProgram.textureCoordAttribute = GL.getAttribLocation(this.shaderProgram, "aTextureCoord");
     GL.enableVertexAttribArray(this.shaderProgram.textureCoordAttribute);
 
     this.shaderProgram.pMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uPMatrix");
     this.shaderProgram.mvMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uMVMatrix");
+    this.shaderProgram.nMatrixUniform = GL.getUniformLocation(this.shaderProgram, "uNMatrix");
     this.shaderProgram.samplerUniform = GL.getUniformLocation(this.shaderProgram, "uSampler");
+    this.shaderProgram.ambientColorUniform = GL.getUniformLocation(this.shaderProgram, "uAmbientColor");
+    this.shaderProgram.lightingDirectionUniform = GL.getUniformLocation(this.shaderProgram, "uLightingDirection");
+    this.shaderProgram.directionalColorUniform = GL.getUniformLocation(this.shaderProgram, "uDirectionalColor");
     this.shaderProgram.textureOffsetX = GL.getUniformLocation(this.shaderProgram, "uTextureOffsetX");
     this.shaderProgram.textureOffsetY = GL.getUniformLocation(this.shaderProgram, "uTextureOffsetY");
   };
@@ -96,6 +103,10 @@ var MinecraftEditor = MinecraftEditor || {};
   proto.setMatrixUniforms = function() {
     GL.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, this.pMatrix);
     GL.uniformMatrix4fv(this.shaderProgram.mvMatrixUniform, false, this.mvMatrix);
+    var normalMatrix = mat3.clone([this.mvMatrix[0], this.mvMatrix[1], this.mvMatrix[2], this.mvMatrix[4], this.mvMatrix[5], this.mvMatrix[6], this.mvMatrix[8], this.mvMatrix[9], this.mvMatrix[10]]);
+    mat3.invert(normalMatrix, normalMatrix);
+    mat3.transpose(normalMatrix, normalMatrix);
+    GL.uniformMatrix3fv(this.shaderProgram.nMatrixUniform, false, normalMatrix);
   };
 
   proto.setTextureOffsetUniforms = function() {
@@ -154,6 +165,49 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(vertices), GL.STATIC_DRAW);
     this.cubeVertexPositionBuffer.itemSize = 3; 
     this.cubeVertexPositionBuffer.numItems = 24;
+
+    this.cubeVertexNormalBuffer = GL.createBuffer();
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexNormalBuffer);
+    var vertexNormals = [
+      // Front face
+       0.0,  0.0,  1.0,
+       0.0,  0.0,  1.0,
+       0.0,  0.0,  1.0,
+       0.0,  0.0,  1.0,
+
+      // Back face
+       0.0,  0.0, -1.0,
+       0.0,  0.0, -1.0,
+       0.0,  0.0, -1.0,
+       0.0,  0.0, -1.0,
+
+      // Top face
+       0.0,  1.0,  0.0,
+       0.0,  1.0,  0.0,
+       0.0,  1.0,  0.0,
+       0.0,  1.0,  0.0,
+
+      // Bottom face
+       0.0, -1.0,  0.0,
+       0.0, -1.0,  0.0,
+       0.0, -1.0,  0.0,
+       0.0, -1.0,  0.0,
+
+      // Right face
+       1.0,  0.0,  0.0,
+       1.0,  0.0,  0.0,
+       1.0,  0.0,  0.0,
+       1.0,  0.0,  0.0,
+
+      // Left face
+      -1.0,  0.0,  0.0,
+      -1.0,  0.0,  0.0,
+      -1.0,  0.0,  0.0,
+      -1.0,  0.0,  0.0,
+    ];
+    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(vertexNormals), GL.STATIC_DRAW);
+    this.cubeVertexNormalBuffer.itemSize = 3;
+    this.cubeVertexNormalBuffer.numItems = 24;
 
     this.cubeVertexTextureCoordBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
@@ -229,7 +283,7 @@ var MinecraftEditor = MinecraftEditor || {};
 
     mat4.identity(this.mvMatrix);
 
-    mat4.translate(this.mvMatrix, this.mvMatrix, [0.0, 0.0, -5.0]);
+    mat4.translate(this.mvMatrix, this.mvMatrix, [0.0, 0.0, -10.0]);
 
     // cube
     mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.xRot), [1, 0, 0]);
@@ -239,11 +293,25 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
 
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexNormalBuffer);
+    GL.vertexAttribPointer(this.shaderProgram.vertexNormalAttribute, this.cubeVertexNormalBuffer.itemSize, GL.FLOAT, false, 0, 0);
+
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
     GL.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.cubeVertexTextureCoordBuffer.itemSize, GL.FLOAT, false, 0, 0);
 
     GL.activeTexture(GL.TEXTURE0);
     GL.bindTexture(GL.TEXTURE_2D, this.stoneTexture);
+
+    GL.uniform3f(this.shaderProgram.ambientColorUniform, 0.1, 0.1, 0.1);
+
+    var lightingDirection = [-0.25, -0.25, -1.0];
+    var adjustedLD = vec3.create();
+    vec3.normalize(adjustedLD, lightingDirection);
+    vec3.scale(adjustedLD, adjustedLD, -1);
+    GL.uniform3fv(this.shaderProgram.lightingDirectionUniform, adjustedLD);
+
+    GL.uniform3f(this.shaderProgram.directionalColorUniform, 0.8, 0.8, 0.8);
+
     GL.uniform1i(this.shaderProgram.samplerUniform, 0);
     this.setTextureOffsetUniforms();
 

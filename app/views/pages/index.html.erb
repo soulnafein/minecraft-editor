@@ -1,5 +1,6 @@
 <canvas id="lesson01-canvas" style="border: none;" width="500" height="500"></canvas>
 
 <%= javascript_tag do %>
-  new MinecraftEditor.Program().start();
+  window.theProgram = new MinecraftEditor.Program()
+  window.theProgram.start();
 <% end %>
