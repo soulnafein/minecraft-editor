@@ -1,5 +1,5 @@
 //= require makeClass
-//= require gl-matrix
+//= require gl-matrix-2
 //= require gl
 //= require shaderHelper
 //= require shaders
@@ -225,16 +225,16 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.viewport(0, 0, GL.viewportWidth, GL.viewportHeight);
     GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
-    mat4.perspective(45, GL.viewportWidth / GL.viewportHeight, 0.1, 100.0, this.pMatrix);
+    mat4.perspective(this.pMatrix, 45, GL.viewportWidth / GL.viewportHeight, 0.1, 100.0);
 
     mat4.identity(this.mvMatrix);
 
-    mat4.translate(this.mvMatrix, [0.0, 0.0, -5.0]);
+    mat4.translate(this.mvMatrix, this.mvMatrix, [0.0, 0.0, -5.0]);
 
     // cube
-    mat4.rotate(this.mvMatrix, degToRad(this.xRot), [1, 0, 0]);
-    mat4.rotate(this.mvMatrix, degToRad(this.yRot), [0, 1, 0]);
-    mat4.rotate(this.mvMatrix, degToRad(this.zRot), [0, 0, 1]);
+    mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.xRot), [1, 0, 0]);
+    mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.yRot), [0, 1, 0]);
+    mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.zRot), [0, 0, 1]);
 
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
@@ -266,8 +266,7 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   proto.mvPushMatrix = function() {
-    var copy = mat4.create();
-    mat4.set(this.mvMatrix, copy);
+    var copy = mat4.clone(this.mvMatrix);
     this.mvMatrixStack.push(copy);
   };
 
