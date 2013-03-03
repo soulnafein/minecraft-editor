@@ -1,4 +1,13 @@
-<canvas id="lesson01-canvas" style="border: none;" width="500" height="500"></canvas>
+<style>
+  * { margin: 0; padding: 0;}
+
+  body, html { height:100%; }
+
+  #canvas {
+      position:absolute;
+  }
+</style>
+<canvas id="canvas" width="500" height="500" style="border: none;"></canvas>
 
 <%= javascript_tag do %>
   window.theProgram = new MinecraftEditor.Program()

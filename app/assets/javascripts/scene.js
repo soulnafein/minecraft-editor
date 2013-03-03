@@ -5,9 +5,10 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.Scene = makeClass();
   var Scene = MinecraftEditor.Scene.prototype;
 
-  Scene.init = function(shaderProgram) {
+  Scene.init = function(camera, shaderProgram) {
     this.blockType = 209;
     this.lastTime = 0;
+    this.camera = camera;
     this.shaderProgram = shaderProgram;
     this.initBuffers();
     this.initTextures();
@@ -25,20 +26,15 @@ var MinecraftEditor = MinecraftEditor || {};
     this.lastTime = timeNow;
   };
 
-
   Scene.render = function() {
     this.mvMatrix = mat4.create();
-    this.pMatrix = mat4.create();
     GL.clearColor(0.0, 0.0, 0.0, 1.0);
-    GL.enable(GL.DEPTH_TEST);
-    GL.viewport(0, 0, GL.viewportWidth, GL.viewportHeight);
     GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
-    mat4.perspective(this.pMatrix, 45, GL.viewportWidth / GL.viewportHeight, 0.1, 100.0);
 
     mat4.identity(this.mvMatrix);
 
-    mat4.translate(this.mvMatrix, this.mvMatrix, [0.0, 0.0, -10.0]);
+    mat4.translate(this.mvMatrix, this.mvMatrix, [0.0, 0.0, -5.0]);
 
     // cube
     mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(this.xRot), [1, 0, 0]);
@@ -77,7 +73,7 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Scene.setMatrixUniforms = function() {
-    GL.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, this.pMatrix);
+    GL.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, this.camera.getPerspectiveMatrix());
     GL.uniformMatrix4fv(this.shaderProgram.mvMatrixUniform, false, this.mvMatrix);
     var normalMatrix = mat3.clone([this.mvMatrix[0], this.mvMatrix[1], this.mvMatrix[2], this.mvMatrix[4], this.mvMatrix[5], this.mvMatrix[6], this.mvMatrix[8], this.mvMatrix[9], this.mvMatrix[10]]);
     mat3.invert(normalMatrix, normalMatrix);
@@ -271,7 +267,6 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
     GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
     GL.bindTexture(GL.TEXTURE_2D, null);
-    console.log(texture);
   }
 
 

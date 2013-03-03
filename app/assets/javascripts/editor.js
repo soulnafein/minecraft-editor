@@ -3,6 +3,7 @@
 //= require gl
 //= require shaderHelper
 //= require shaders
+//= require camera
 //= require scene
 //= require webgl-utils
 var MinecraftEditor = MinecraftEditor || {};
@@ -11,13 +12,28 @@ var MinecraftEditor = MinecraftEditor || {};
   var proto = MinecraftEditor.Program.prototype;
 
   proto.init = function() {
-    this.canvas = document.getElementById("lesson01-canvas");
+    this.canvas = document.getElementById("canvas");
+    this.canvas.width = document.width;
+    this.canvas.height = document.height;
+    var self = this;
+    window.onresize = this.bind( this.handleWindowResize );
+  };
+
+  proto.handleWindowResize = function() {
+    console.log(this.canvas);
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    this.camera.resizeViewport(this.canvas.width,
+                               this.canvas.height);
+    console.log("Window resize");
   };
 
   proto.start = function() {
     GL.init(this.canvas);
-    this.initKeyboard();
-    this.scene = MinecraftEditor.Scene(this.createShaderProgram());
+    //this.initKeyboard();
+    this.camera = MinecraftEditor.Camera(window.innerWidth, 
+                                         window.innerHeight);
+    this.scene = MinecraftEditor.Scene(this.camera, this.createShaderProgram());
     this.tick();
   };
 
