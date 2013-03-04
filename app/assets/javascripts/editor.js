@@ -5,6 +5,7 @@
 //= require shaders
 //= require camera
 //= require scene
+//= require chunk
 //= require webgl-utils
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
@@ -15,17 +16,15 @@ var MinecraftEditor = MinecraftEditor || {};
     this.canvas = document.getElementById("canvas");
     this.canvas.width = document.width;
     this.canvas.height = document.height;
-    var self = this;
+    this.chunk = MinecraftEditor.Chunk();
     window.onresize = this.bind( this.handleWindowResize );
   };
 
   proto.handleWindowResize = function() {
-    console.log(this.canvas);
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
     this.camera.resizeViewport(this.canvas.width,
                                this.canvas.height);
-    console.log("Window resize");
   };
 
   proto.start = function() {
@@ -33,7 +32,7 @@ var MinecraftEditor = MinecraftEditor || {};
     //this.initKeyboard();
     this.camera = MinecraftEditor.Camera(window.innerWidth, 
                                          window.innerHeight);
-    this.scene = MinecraftEditor.Scene(this.camera, this.createShaderProgram());
+    this.scene = MinecraftEditor.Scene(this.camera, this.createShaderProgram(), this.chunk);
     this.tick();
   };
 
