@@ -9,8 +9,14 @@ var MinecraftEditor = MinecraftEditor || {};
     this.viewportWidth = viewportWidth;
     this.viewportHeight = viewportHeight;
     this.pMatrix = mat4.create();
+    this.vMatrix = mat4.create();
     GL.enable(GL.DEPTH_TEST);
     this.resizeViewport(viewportWidth, viewportHeight);
+    window.document.addEventListener('mouseup', this.bind( this.mouseup ), false);
+  };
+
+  Camera.mouseup = function(event) {
+    console.log(event.clientX, event.clientY);
   };
 
   Camera.resizeViewport = function(viewportWidth, viewportHeight) {
@@ -21,9 +27,8 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Camera.moveTo = function(position) {
-    mat4.identity(this.pMatrix);
-    this.resizeViewport(this.viewportWidth, this.viewportHeight);
-    mat4.translate(this.pMatrix, this.pMatrix, position);
+    mat4.identity(this.vMatrix);
+    mat4.translate(this.vMatrix, this.vMatrix, position);
   };
 
   Camera.lookAt = function(target) {
@@ -31,6 +36,10 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Camera.getPerspectiveMatrix = function() {
     return this.pMatrix;
+  };
+
+  Camera.getViewMatrix = function() {
+    return this.vMatrix;
   };
 
   function degToRad(degrees) {

@@ -27,11 +27,11 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Scene.render = function() {
-    this.mvMatrix = mat4.create();
+    this.mMatrix = mat4.create();
     GL.clearColor(0.0, 0.0, 0.0, 1.0);
     GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
-    mat4.identity(this.mvMatrix);
+    mat4.identity(this.mMatrix);
 
     var chunk = this.chunk;
 
@@ -39,9 +39,9 @@ var MinecraftEditor = MinecraftEditor || {};
       chunk.regenerateBuffers();
     }
     // cube
-    mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(chunk.yRot), [0, 1, 0]);
-    mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(chunk.yRot), [0, 1, 0]);
-    mat4.rotate(this.mvMatrix, this.mvMatrix, degToRad(chunk.zRot), [0, 0, 1]);
+    mat4.rotate(this.mMatrix, this.mMatrix, degToRad(chunk.yRot), [0, 1, 0]);
+    mat4.rotate(this.mMatrix, this.mMatrix, degToRad(chunk.yRot), [0, 1, 0]);
+    mat4.rotate(this.mMatrix, this.mMatrix, degToRad(chunk.zRot), [0, 0, 1]);
 
     GL.bindBuffer(GL.ARRAY_BUFFER, chunk.cubeVertexPositionBuffer);
     GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, chunk.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
@@ -77,8 +77,12 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Scene.setMatrixUniforms = function() {
     GL.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, this.camera.getPerspectiveMatrix());
-    GL.uniformMatrix4fv(this.shaderProgram.mvMatrixUniform, false, this.mvMatrix);
-    var normalMatrix = mat3.clone([this.mvMatrix[0], this.mvMatrix[1], this.mvMatrix[2], this.mvMatrix[4], this.mvMatrix[5], this.mvMatrix[6], this.mvMatrix[8], this.mvMatrix[9], this.mvMatrix[10]]);
+    GL.uniformMatrix4fv(this.shaderProgram.mMatrixUniform, false, this.mMatrix);
+    GL.uniformMatrix4fv(this.shaderProgram.vMatrixUniform, false, this.camera.getViewMatrix());
+
+    var mvMatrix = mat4.create(); 
+    mat4.multiply(mvMatrix, this.mMatrix, this.camera.getViewMatrix());
+    var normalMatrix = mat3.clone([mvMatrix[0], mvMatrix[1], mvMatrix[2], mvMatrix[4], mvMatrix[5], mvMatrix[6], mvMatrix[8], mvMatrix[9], mvMatrix[10]]);
     mat3.invert(normalMatrix, normalMatrix);
     mat3.transpose(normalMatrix, normalMatrix);
     GL.uniformMatrix3fv(this.shaderProgram.nMatrixUniform, false, normalMatrix);

@@ -81,7 +81,8 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.enableVertexAttribArray(program.textureCoordAttribute);
 
     program.pMatrixUniform = GL.getUniformLocation(program, "uPMatrix");
-    program.mvMatrixUniform = GL.getUniformLocation(program, "uMVMatrix");
+    program.vMatrixUniform = GL.getUniformLocation(program, "uVMatrix");
+    program.mMatrixUniform = GL.getUniformLocation(program, "uMMatrix");
     program.nMatrixUniform = GL.getUniformLocation(program, "uNMatrix");
     program.samplerUniform = GL.getUniformLocation(program, "uSampler");
     program.ambientColorUniform = GL.getUniformLocation(program, "uAmbientColor");

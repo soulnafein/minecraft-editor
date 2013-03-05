@@ -58,7 +58,6 @@ var MinecraftEditor = MinecraftEditor || {};
     for(var i=0; i<this.blocks.length; ++i) {
       cubeVertexIndices = cubeVertexIndices.concat(this.blocks[i].getIndices(i));     
     }
-    console.log(cubeVertexIndices);
     GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), GL.STATIC_DRAW);
     this.cubeVertexIndexBuffer.itemSize = 1;
     this.cubeVertexIndexBuffer.numItems = cubeVertexIndices.length;
