@@ -5,28 +5,34 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.Scene = makeClass();
   var Scene = MinecraftEditor.Scene.prototype;
 
-  Scene.init = function(camera, shaderProgram, chunk) {
+  Scene.init = function(camera, shaderProgram, chunk, 
+                        arcballControl) {
     this.blockType = 209;
     this.lastTime = 0;
     this.camera = camera;
+    this.arcballControl = arcballControl;
+    this.camera.moveTo([0.0, 0.0, 10.0]);
+    this.camera.lookAt([0, 0, 0]);
     this.shaderProgram = shaderProgram;
     this.chunk = chunk;
     this.initTextures();
   };
 
   Scene.animate = function() {
+    this.arcballControl.update()
     var timeNow = new Date().getTime();
     if (this.lastTime != 0) {
       var elapsed = timeNow - this.lastTime;
 
-      this.chunk.xRot += (90 * elapsed) / 1000.0;
-      this.chunk.yRot += (90 * elapsed) / 1000.0;
-      this.chunk.zRot += (90 * elapsed) / 1000.0;
+      //this.chunk.xRot += (90 * elapsed) / 1000.0;
+      //this.chunk.yRot += (90 * elapsed) / 1000.0;
+      //this.chunk.zRot += (90 * elapsed) / 1000.0;
     }
     this.lastTime = timeNow;
   };
 
   Scene.render = function() {
+    this.camera.update();
     this.mMatrix = mat4.create();
     GL.clearColor(0.0, 0.0, 0.0, 1.0);
     GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
@@ -70,7 +76,6 @@ var MinecraftEditor = MinecraftEditor || {};
 
 
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, chunk.cubeVertexIndexBuffer);
-    this.camera.moveTo([-1.0, 0.0, -5.0]);
     this.setMatrixUniforms();
     GL.drawElements(GL.TRIANGLES, chunk.cubeVertexIndexBuffer.numItems, GL.UNSIGNED_SHORT, 0);
   };

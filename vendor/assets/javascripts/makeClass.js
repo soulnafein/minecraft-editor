@@ -11,7 +11,7 @@ function makeClass(){
   Object.prototype.bind = function ( fn ) {
     var self = this;
     return function () {
-      fn.apply( self, arguments );
+      return fn.apply( self, arguments );
     };
   };
 

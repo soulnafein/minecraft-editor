@@ -7,11 +7,15 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Chunk.init = function() {
     this.blocks = [];
-    var block = MinecraftEditor.Block(0, 0, -1);
+    var block = MinecraftEditor.Block(0, 0, 0);
     this.blocks.push(block);
-    block = MinecraftEditor.Block(2, 0, -1);
+    var block = MinecraftEditor.Block(2, 0, 2);
     this.blocks.push(block);
-    block = MinecraftEditor.Block(2, 0, -3);
+    var block = MinecraftEditor.Block(-4, 0, 3);
+    this.blocks.push(block);
+    var block = MinecraftEditor.Block(-4, 2, 3);
+    this.blocks.push(block);
+    var block = MinecraftEditor.Block(-2, 0, 0);
     this.blocks.push(block);
     this.xRot = 0;
     this.yRot = 0;

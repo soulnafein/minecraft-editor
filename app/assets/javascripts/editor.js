@@ -4,6 +4,7 @@
 //= require shaderHelper
 //= require shaders
 //= require camera
+//= require arcball_controls
 //= require scene
 //= require chunk
 //= require webgl-utils
@@ -32,7 +33,8 @@ var MinecraftEditor = MinecraftEditor || {};
     //this.initKeyboard();
     this.camera = MinecraftEditor.Camera(window.innerWidth, 
                                          window.innerHeight);
-    this.scene = MinecraftEditor.Scene(this.camera, this.createShaderProgram(), this.chunk);
+    this.arcballControls = MinecraftEditor.ArcballControls(this.camera);
+    this.scene = MinecraftEditor.Scene(this.camera, this.createShaderProgram(), this.chunk, this.arcballControls);
     this.tick();
   };
 
