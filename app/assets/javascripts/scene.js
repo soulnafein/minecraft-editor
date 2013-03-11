@@ -19,10 +19,10 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Scene.animate = function() {
-    this.arcballControl.update()
     var timeNow = new Date().getTime();
     if (this.lastTime != 0) {
       var elapsed = timeNow - this.lastTime;
+      this.arcballControl.update(elapsed)
 
       //this.chunk.xRot += (90 * elapsed) / 1000.0;
       //this.chunk.yRot += (90 * elapsed) / 1000.0;

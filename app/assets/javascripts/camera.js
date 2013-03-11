@@ -7,9 +7,11 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Camera.init = function(viewportWidth, viewportHeight) {
     this.up = vec3.fromValues(0,1,0);
-    this.target = vec3.fromValues(0,0,-1);
-    this.position = vec3.fromValues(0,0,0);
-    this.rotation = quat.create();
+    this.target = vec3.fromValues(0,0,0);
+    this.position = vec3.fromValues(0,0,-1);
+
+    this.pitch = 0;
+    this.yaw = 0;
 
     this.viewportWidth = viewportWidth;
     this.viewportHeight = viewportHeight;
@@ -26,12 +28,28 @@ var MinecraftEditor = MinecraftEditor || {};
     mat4.perspective(this.pMatrix, 45, viewportWidth/viewportHeight, 0.1, 100.0);
   };
 
-  Camera.rotateWithQuaternion = function(quaternion) {
-    quat.normalize(quaternion, quaternion);
-    //quat.invert(quaternion, quaternion);
-    vec3.transformQuat(this.position, this.position, quaternion);
-    vec3.transformQuat(this.up, this.up, quaternion);
-    vec3.transformQuat(this.target, this.target, quaternion);
+  Camera.rotateX = function(pitch) {
+    this.pitch += pitch;
+    if (this.pitch < -90) {
+      this.pitch = -90;
+    }
+     
+    if (this.pitch > 0) {
+      this.pitch = 0;
+    }
+    this.debug();
+  };
+
+  Camera.rotateY = function(yaw) {
+    this.yaw += yaw;
+    if (this.yaw >= 360) {
+      this.yaw = 0;
+    }
+     
+    if (this.yaw < 0) {
+      this.yaw = 360+(this.yaw);
+    }
+    this.debug();
   };
 
   Camera.moveTo = function(position) {
@@ -45,7 +63,13 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Camera.update = function() {
-    mat4.lookAt(this.vMatrix, this.position, this.target, this.up);
+    var rotation = mat4.create();
+    mat4.rotateX(rotation, rotation,  degToRad(this.pitch));
+    mat4.rotateY(rotation, rotation, degToRad(this.yaw));
+
+    var transformedPosition = vec3.create();
+    vec3.transformMat4(transformedPosition, this.position, rotation);
+    mat4.lookAt(this.vMatrix, transformedPosition, this.target, this.up);
   };
 
   Camera.getPerspectiveMatrix = function() {
@@ -55,6 +79,10 @@ var MinecraftEditor = MinecraftEditor || {};
   Camera.getViewMatrix = function() {
     return this.vMatrix;
   };
+
+  Camera.debug = function() {
+    console.log({yaw: this.yaw, pitch: this.pitch});
+  }
 
   function degToRad(degrees) {
     return degrees * Math.PI / 180;
