@@ -5,30 +5,14 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.Scene = makeClass();
   var Scene = MinecraftEditor.Scene.prototype;
 
-  Scene.init = function(camera, shaderProgram, chunk, 
-                        arcballControl) {
+  Scene.init = function(camera, shaderProgram, chunk) {
     this.blockType = 209;
-    this.lastTime = 0;
     this.camera = camera;
-    this.arcballControl = arcballControl;
     this.camera.moveTo([0.0, 0.0, 10.0]);
     this.camera.lookAt([0, 0, 0]);
     this.shaderProgram = shaderProgram;
     this.chunk = chunk;
     this.initTextures();
-  };
-
-  Scene.animate = function() {
-    var timeNow = new Date().getTime();
-    if (this.lastTime != 0) {
-      var elapsed = timeNow - this.lastTime;
-      this.arcballControl.update(elapsed)
-
-      //this.chunk.xRot += (90 * elapsed) / 1000.0;
-      //this.chunk.yRot += (90 * elapsed) / 1000.0;
-      //this.chunk.zRot += (90 * elapsed) / 1000.0;
-    }
-    this.lastTime = timeNow;
   };
 
   Scene.render = function() {
@@ -44,10 +28,6 @@ var MinecraftEditor = MinecraftEditor || {};
     if (chunk.needsBuffersRegeneration) {
       chunk.regenerateBuffers();
     }
-    // cube
-    mat4.rotate(this.mMatrix, this.mMatrix, degToRad(chunk.yRot), [0, 1, 0]);
-    mat4.rotate(this.mMatrix, this.mMatrix, degToRad(chunk.yRot), [0, 1, 0]);
-    mat4.rotate(this.mMatrix, this.mMatrix, degToRad(chunk.zRot), [0, 0, 1]);
 
     GL.bindBuffer(GL.ARRAY_BUFFER, chunk.cubeVertexPositionBuffer);
     GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, chunk.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);

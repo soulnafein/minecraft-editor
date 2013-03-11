@@ -4,12 +4,17 @@
 //= require shaderHelper
 //= require shaders
 //= require camera
-//= require arcball_controls
+//= require camera_controls
 //= require scene
 //= require chunk
 //= require webgl-utils
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
+  Camera = MinecraftEditor.Camera;
+  CameraControls = MinecraftEditor.CameraControls;
+  Scene = MinecraftEditor.Scene;
+  Chunk = MinecraftEditor.Chunk;
+
   MinecraftEditor.Program = makeClass();
   var proto = MinecraftEditor.Program.prototype;
 
@@ -17,24 +22,15 @@ var MinecraftEditor = MinecraftEditor || {};
     this.canvas = document.getElementById("canvas");
     this.canvas.width = document.width;
     this.canvas.height = document.height;
-    this.chunk = MinecraftEditor.Chunk();
-    window.onresize = this.bind( this.handleWindowResize );
-  };
-
-  proto.handleWindowResize = function() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-    this.camera.resizeViewport(this.canvas.width,
-                               this.canvas.height);
+    this.chunk = Chunk();
   };
 
   proto.start = function() {
     GL.init(this.canvas);
     //this.initKeyboard();
-    this.camera = MinecraftEditor.Camera(window.innerWidth, 
-                                         window.innerHeight);
-    this.arcballControls = MinecraftEditor.ArcballControls(this.camera);
-    this.scene = MinecraftEditor.Scene(this.camera, this.createShaderProgram(), this.chunk, this.arcballControls);
+    this.camera = Camera(window.innerWidth, window.innerHeight);
+    this.cameraControls = CameraControls(this.camera);
+    this.scene = Scene(this.camera, this.createShaderProgram(), this.chunk);
     this.tick();
   };
 
@@ -63,8 +59,19 @@ var MinecraftEditor = MinecraftEditor || {};
   proto.tick = function() {
     requestAnimationFrame(this.bind(this.tick));
     this.scene.render();
-    this.scene.animate();
+    this.animate();
   };
+
+
+  proto.animate = function() {
+    var timeNow = new Date().getTime();
+    if (this.lastTime != 0) {
+      var elapsed = timeNow - this.lastTime;
+      this.cameraControls.update(elapsed)
+    }
+    this.lastTime = timeNow;
+  };
+
 
   proto.createShaderProgram = function() {
     var fragmentShader = ShaderHelper.loadFragmentShader(MinecraftEditor.Shaders.fragmentShader);

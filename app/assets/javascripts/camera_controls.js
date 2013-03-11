@@ -3,37 +3,43 @@
 
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
-  MinecraftEditor.ArcballControls = makeClass();
-  var ArcballControls = MinecraftEditor.ArcballControls.prototype;
+  MinecraftEditor.CameraControls = makeClass();
+  var CameraControls = MinecraftEditor.CameraControls.prototype;
 
-  ArcballControls.init = function(camera) {
+  CameraControls.init = function(camera, canvas) {
     this.camera = camera;
-    this.viewportWidth = camera.viewportWidth;
-    this.viewportHeight = camera.viewportHeight;
-    this.radius = (this.viewportHeight + this.viewportWidth) / 4;
+    this.canvas = canvas;
     window.document.addEventListener('mousedown', this.bind( this.mousedown ), false);
+    window.addEventListener('resize', this.bind( this.handleResize ), false);
   };
 
-  ArcballControls.mousedown = function(event) {
+  CameraControls.mousedown = function(event) {
     this.state = "ROTATE";
-    this.startPoint = this.endPoint = this.mapToSphere(event.clientX, event.clientY);
+    this.startPoint = this.endPoint = this.camera.convertCoords(event.clientX, event.clientY);
     this.boundMouseUp = this.bind( this.mouseup );
     this.boundMouseMove = this.bind( this.mousemove );
     window.document.addEventListener('mouseup', this.boundMouseUp, false);
     window.document.addEventListener('mousemove', this.boundMouseMove, false);
   };
 
-  ArcballControls.mousemove = function(event) {
-    this.endPoint = this.mapToSphere(event.clientX, event.clientY);
+  CameraControls.mousemove = function(event) {
+    this.endPoint = this.camera.convertCoords(event.clientX, event.clientY);
   };
 
-  ArcballControls.mouseup = function(event) {
+  CameraControls.mouseup = function(event) {
     this.state = "";
     window.document.removeEventListener('mouseup', this.boundMouseUp);
     window.document.removeEventListener('mousemove', this.boundMouseMove);
   };
 
-  ArcballControls.update = function(deltaTime) {
+  CameraControls.handleResize = function() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    this.camera.resizeViewport(this.canvas.width,
+                               this.canvas.height);
+  };
+
+  CameraControls.update = function(deltaTime) {
     if(this.state == "ROTATE") {
       var deltaX = this.endPoint[0] - this.startPoint[0]
       var deltaY = this.endPoint[1] - this.startPoint[1]
@@ -48,11 +54,4 @@ var MinecraftEditor = MinecraftEditor || {};
     }
   };
 
-
-  ArcballControls.mapToSphere = function (clientX, clientY) {
-    var x = 1.0*event.clientX/this.viewportWidth*2 - 1.0;
-    var y = -1.0 * (1.0*event.clientY/this.viewportHeight*2 - 1.0);
-
-    return [x, y]
-  };
 })();

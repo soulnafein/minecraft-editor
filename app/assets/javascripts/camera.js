@@ -11,13 +11,10 @@ var MinecraftEditor = MinecraftEditor || {};
     this.position = vec3.fromValues(0,0,-1);
 
     this.rotation = quat.create();
-
     this.pitch = 0;
 
-    this.viewportWidth = viewportWidth;
-    this.viewportHeight = viewportHeight;
-    this.pMatrix = mat4.create();
-    this.vMatrix = mat4.create();
+    this.projectionMatrix = mat4.create();
+    this.viewMatrix = mat4.create();
     GL.enable(GL.DEPTH_TEST);
     this.resizeViewport(viewportWidth, viewportHeight);
   };
@@ -26,7 +23,7 @@ var MinecraftEditor = MinecraftEditor || {};
     this.viewportWidth = viewportWidth;
     this.viewportHeight = viewportHeight;
     GL.viewport(0, 0, viewportWidth, viewportHeight);
-    mat4.perspective(this.pMatrix, 45, viewportWidth/viewportHeight, 0.1, 100.0);
+    mat4.perspective(this.projectionMatrix, 45, viewportWidth/viewportHeight, 0.1, 100.0);
   };
 
   Camera.rotateX = function(pitch) {
@@ -47,8 +44,6 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Camera.moveTo = function(position) {
     this.position = position;
-    console.log(position);
-    //mat4.translate(this.vMatrix, this.vMatrix, position);
   };
 
   Camera.lookAt = function(target) {
@@ -61,20 +56,23 @@ var MinecraftEditor = MinecraftEditor || {};
 
     var transformedPosition = vec3.create();
     vec3.transformQuat(transformedPosition, this.position, rotation);
-    mat4.lookAt(this.vMatrix, transformedPosition, this.target, this.up);
+    mat4.lookAt(this.viewMatrix, transformedPosition, this.target, this.up);
   };
 
   Camera.getPerspectiveMatrix = function() {
-    return this.pMatrix;
+    return this.projectionMatrix;
   };
 
   Camera.getViewMatrix = function() {
-    return this.vMatrix;
+    return this.viewMatrix;
   };
 
-  Camera.debug = function() {
-    console.log({yaw: this.yaw, pitch: this.pitch});
-  }
+  Camera.convertCoords = function (clientX, clientY) {
+    var x = 1.0*clientX/this.viewportWidth*2 - 1.0;
+    var y = -1.0 * (1.0*clientY/this.viewportHeight*2 - 1.0);
+
+    return [x, y]
+  };
 
   function degToRad(degrees) {
     return degrees * Math.PI / 180;
