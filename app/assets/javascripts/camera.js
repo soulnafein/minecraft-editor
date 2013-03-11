@@ -26,6 +26,18 @@ var MinecraftEditor = MinecraftEditor || {};
     mat4.perspective(this.projectionMatrix, 45, viewportWidth/viewportHeight, 0.1, 100.0);
   };
 
+  Camera.panX = function(x) {
+    var vector = vec3.fromValues(x, 0, 0);
+    vec3.add(this.position, this.position, vector);
+    vec3.add(this.target, this.target, vector);
+  };
+
+  Camera.panY = function(y) {
+    var vector = vec3.fromValues(0, y, 0);
+    vec3.add(this.position, this.position, vector);
+    vec3.add(this.target, this.target, vector);
+  };
+
   Camera.rotateX = function(pitch) {
     this.pitch += pitch;
     if (this.pitch < -90) {
@@ -56,7 +68,10 @@ var MinecraftEditor = MinecraftEditor || {};
 
     var transformedPosition = vec3.create();
     vec3.transformQuat(transformedPosition, this.position, rotation);
-    mat4.lookAt(this.viewMatrix, transformedPosition, this.target, this.up);
+
+    var transformedTarget = vec3.create();
+    vec3.transformQuat(transformedTarget, this.target, rotation);
+    mat4.lookAt(this.viewMatrix, transformedPosition, transformedTarget, this.up);
   };
 
   Camera.getPerspectiveMatrix = function() {

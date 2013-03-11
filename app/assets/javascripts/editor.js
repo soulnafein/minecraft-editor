@@ -20,8 +20,8 @@ var MinecraftEditor = MinecraftEditor || {};
 
   proto.init = function() {
     this.canvas = document.getElementById("canvas");
-    this.canvas.width = document.width;
-    this.canvas.height = document.height;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
     this.chunk = Chunk();
   };
 
@@ -29,7 +29,7 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.init(this.canvas);
     //this.initKeyboard();
     this.camera = Camera(window.innerWidth, window.innerHeight);
-    this.cameraControls = CameraControls(this.camera);
+    this.cameraControls = CameraControls(this.camera, this.canvas);
     this.scene = Scene(this.camera, this.createShaderProgram(), this.chunk);
     this.tick();
   };

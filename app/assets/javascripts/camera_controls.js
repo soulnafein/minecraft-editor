@@ -6,6 +6,10 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.CameraControls = makeClass();
   var CameraControls = MinecraftEditor.CameraControls.prototype;
 
+  var STATES = { ROTATE: 0, PAN: 1 };
+  var rotationSpeed = 5;
+  var panSpeed = 3;
+
   CameraControls.init = function(camera, canvas) {
     this.camera = camera;
     this.canvas = canvas;
@@ -14,22 +18,36 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   CameraControls.mousedown = function(event) {
-    this.state = "ROTATE";
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.button === 0) {
+      this.state = STATES.ROTATE;
+    }
+
+    if (event.button === 0 && event.altKey === true) {
+      this.state = STATES.PAN;
+    }
+
     this.startPoint = this.endPoint = this.camera.convertCoords(event.clientX, event.clientY);
     this.boundMouseUp = this.bind( this.mouseup );
     this.boundMouseMove = this.bind( this.mousemove );
-    window.document.addEventListener('mouseup', this.boundMouseUp, false);
-    window.document.addEventListener('mousemove', this.boundMouseMove, false);
+    this.canvas.addEventListener('mouseup', this.boundMouseUp, false);
+    this.canvas.addEventListener('mousemove', this.boundMouseMove, false);
   };
 
   CameraControls.mousemove = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     this.endPoint = this.camera.convertCoords(event.clientX, event.clientY);
   };
 
   CameraControls.mouseup = function(event) {
-    this.state = "";
-    window.document.removeEventListener('mouseup', this.boundMouseUp);
-    window.document.removeEventListener('mousemove', this.boundMouseMove);
+    event.preventDefault();
+    event.stopPropagation();
+    this.state = null;
+    this.canvas.removeEventListener('mouseup', this.boundMouseUp);
+    this.canvas.removeEventListener('mousemove', this.boundMouseMove);
   };
 
   CameraControls.handleResize = function() {
@@ -40,18 +58,39 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   CameraControls.update = function(deltaTime) {
-    if(this.state == "ROTATE") {
-      var deltaX = this.endPoint[0] - this.startPoint[0]
-      var deltaY = this.endPoint[1] - this.startPoint[1]
-      
-      var pitch = (deltaY * deltaTime)*3;
-      var yaw = (deltaX * deltaTime)*3;
-
-      this.camera.rotateX(pitch);
-      this.camera.rotateY(-yaw);
-
-      this.startPoint = this.endPoint;
+    if(this.state == STATES.ROTATE) {
+      this._rotateCamera(deltaTime);
     }
+
+    if(this.state == STATES.PAN) {
+      this._panCamera(deltaTime);
+    };
+  };
+
+  CameraControls._rotateCamera = function(deltaTime) {
+    var deltaX = this.endPoint[0] - this.startPoint[0]
+    var deltaY = this.endPoint[1] - this.startPoint[1]
+    
+    var pitch = (deltaY * deltaTime)*rotationSpeed;
+    var yaw = (deltaX * deltaTime)*rotationSpeed;
+
+    this.camera.rotateX(pitch);
+    this.camera.rotateY(-yaw);
+
+    this.startPoint = this.endPoint;
+  };
+
+  CameraControls._panCamera = function(deltaTime) {
+    var deltaX = this.endPoint[0] - this.startPoint[0]
+    var deltaY = this.endPoint[1] - this.startPoint[1]
+    
+    var x = (deltaX * deltaTime)*panSpeed;
+    var y = (deltaY * deltaTime)*panSpeed;
+
+    this.camera.panX(x);
+    this.camera.panY(y);
+
+    this.startPoint = this.endPoint;
   };
 
 })();
