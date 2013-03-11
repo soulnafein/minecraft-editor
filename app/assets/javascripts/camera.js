@@ -10,8 +10,9 @@ var MinecraftEditor = MinecraftEditor || {};
     this.target = vec3.fromValues(0,0,0);
     this.position = vec3.fromValues(0,0,-1);
 
+    this.rotation = quat.create();
+
     this.pitch = 0;
-    this.yaw = 0;
 
     this.viewportWidth = viewportWidth;
     this.viewportHeight = viewportHeight;
@@ -31,25 +32,17 @@ var MinecraftEditor = MinecraftEditor || {};
   Camera.rotateX = function(pitch) {
     this.pitch += pitch;
     if (this.pitch < -90) {
-      this.pitch = -90;
+      this.pitch = -89.999;
     }
      
     if (this.pitch > 0) {
       this.pitch = 0;
     }
-    this.debug();
   };
 
   Camera.rotateY = function(yaw) {
-    this.yaw += yaw;
-    if (this.yaw >= 360) {
-      this.yaw = 0;
-    }
-     
-    if (this.yaw < 0) {
-      this.yaw = 360+(this.yaw);
-    }
-    this.debug();
+    quat.rotateY(this.rotation, this.rotation, degToRad(yaw));
+    quat.normalize(this.rotation, this.rotation);
   };
 
   Camera.moveTo = function(position) {
@@ -63,12 +56,11 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Camera.update = function() {
-    var rotation = mat4.create();
-    mat4.rotateX(rotation, rotation,  degToRad(this.pitch));
-    mat4.rotateY(rotation, rotation, degToRad(this.yaw));
+    var rotation = quat.create();
+    quat.rotateX(rotation, this.rotation,  degToRad(this.pitch));
 
     var transformedPosition = vec3.create();
-    vec3.transformMat4(transformedPosition, this.position, rotation);
+    vec3.transformQuat(transformedPosition, this.position, rotation);
     mat4.lookAt(this.vMatrix, transformedPosition, this.target, this.up);
   };
 

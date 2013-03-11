@@ -38,8 +38,8 @@ var MinecraftEditor = MinecraftEditor || {};
       var deltaX = this.endPoint[0] - this.startPoint[0]
       var deltaY = this.endPoint[1] - this.startPoint[1]
       
-      var pitch = (deltaY * deltaTime);
-      var yaw = (deltaX * deltaTime);
+      var pitch = (deltaY * deltaTime)*3;
+      var yaw = (deltaX * deltaTime)*3;
 
       this.camera.rotateX(pitch);
       this.camera.rotateY(-yaw);
