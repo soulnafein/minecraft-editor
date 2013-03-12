@@ -23,26 +23,26 @@ var MinecraftEditor = MinecraftEditor || {};
 
     mat4.identity(this.mMatrix);
 
+    GL.activeTexture(GL.TEXTURE0);
+    GL.bindTexture(GL.TEXTURE_2D, this.stoneTexture);
+    
+    this.setupLighting();
+
+    GL.uniform1i(this.shaderProgram.samplerUniform, 0);
+    this.setTextureOffsetUniforms();
+    this.setMatrixUniforms();
+
     var chunk = this.chunk;
 
     if (chunk.needsBuffersRegeneration) {
       chunk.regenerateBuffers();
     }
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, chunk.cubeVertexPositionBuffer);
-    GL.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, chunk.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
+    chunk.draw(this.shaderProgram);
+  };
 
-    GL.bindBuffer(GL.ARRAY_BUFFER, chunk.cubeVertexNormalBuffer);
-    GL.vertexAttribPointer(this.shaderProgram.vertexNormalAttribute, chunk.cubeVertexNormalBuffer.itemSize, GL.FLOAT, false, 0, 0);
-
-    GL.bindBuffer(GL.ARRAY_BUFFER, chunk.cubeVertexTextureCoordBuffer);
-    GL.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, chunk.cubeVertexTextureCoordBuffer.itemSize, GL.FLOAT, false, 0, 0);
-
-    GL.activeTexture(GL.TEXTURE0);
-    GL.bindTexture(GL.TEXTURE_2D, this.stoneTexture);
-
+  Scene.setupLighting = function() {
     GL.uniform3f(this.shaderProgram.ambientColorUniform, 0.1, 0.1, 0.1);
-
     var lightingDirection = [-0.25, -0.25, -1.0];
     var adjustedLD = vec3.create();
     vec3.normalize(adjustedLD, lightingDirection);
@@ -50,14 +50,6 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.uniform3fv(this.shaderProgram.lightingDirectionUniform, adjustedLD);
 
     GL.uniform3f(this.shaderProgram.directionalColorUniform, 0.8, 0.8, 0.8);
-
-    GL.uniform1i(this.shaderProgram.samplerUniform, 0);
-    this.setTextureOffsetUniforms();
-
-
-    GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, chunk.cubeVertexIndexBuffer);
-    this.setMatrixUniforms();
-    GL.drawElements(GL.TRIANGLES, chunk.cubeVertexIndexBuffer.numItems, GL.UNSIGNED_SHORT, 0);
   };
 
   Scene.setMatrixUniforms = function() {

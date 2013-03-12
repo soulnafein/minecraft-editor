@@ -20,7 +20,6 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   CameraControls.mousedown = function(event) {
-    console.log(event);
     event.preventDefault();
     event.stopPropagation();
 

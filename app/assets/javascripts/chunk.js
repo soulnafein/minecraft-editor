@@ -65,9 +65,25 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), GL.STATIC_DRAW);
     this.cubeVertexIndexBuffer.itemSize = 1;
     this.cubeVertexIndexBuffer.numItems = cubeVertexIndices.length;
+
+
     
     // code for buffers
     this.needsBuffersRegeneration = false;
+  };
+
+  Chunk.draw = function(shaderProgram) {
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
+    GL.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
+
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexNormalBuffer);
+    GL.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.cubeVertexNormalBuffer.itemSize, GL.FLOAT, false, 0, 0);
+
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
+    GL.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.cubeVertexTextureCoordBuffer.itemSize, GL.FLOAT, false, 0, 0);
+
+    GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.cubeVertexIndexBuffer);
+    GL.drawElements(GL.TRIANGLES, this.cubeVertexIndexBuffer.numItems, GL.UNSIGNED_SHORT, 0);
   };
 
 })();
