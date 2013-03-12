@@ -6,18 +6,21 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.CameraControls = makeClass();
   var CameraControls = MinecraftEditor.CameraControls.prototype;
 
-  var STATES = { ROTATE: 0, PAN: 1 };
+  var STATES = { ROTATE: 0, PAN: 1, ZOOM: 2 };
   var rotationSpeed = 5;
   var panSpeed = 3;
+  var zoomSpeed = 3;
 
   CameraControls.init = function(camera, canvas) {
     this.camera = camera;
     this.canvas = canvas;
+    this.state = null;
     window.document.addEventListener('mousedown', this.bind( this.mousedown ), false);
     window.addEventListener('resize', this.bind( this.handleResize ), false);
   };
 
   CameraControls.mousedown = function(event) {
+    console.log(event);
     event.preventDefault();
     event.stopPropagation();
 
@@ -27,6 +30,10 @@ var MinecraftEditor = MinecraftEditor || {};
 
     if (event.button === 0 && event.altKey === true) {
       this.state = STATES.PAN;
+    }
+
+    if (event.button === 0 && event.shiftKey === true) {
+      this.state = STATES.ZOOM;
     }
 
     this.startPoint = this.endPoint = this.camera.convertCoords(event.clientX, event.clientY);
@@ -58,39 +65,49 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   CameraControls.update = function(deltaTime) {
-    if(this.state == STATES.ROTATE) {
-      this._rotateCamera(deltaTime);
+    if (this.state === null) { 
+      return;
     }
 
-    if(this.state == STATES.PAN) {
-      this._panCamera(deltaTime);
-    };
-  };
-
-  CameraControls._rotateCamera = function(deltaTime) {
     var deltaX = this.endPoint[0] - this.startPoint[0]
     var deltaY = this.endPoint[1] - this.startPoint[1]
     
+    if(this.state == STATES.ROTATE) {
+      this._rotateCamera(deltaX, deltaY, deltaTime);
+    }
+
+    if(this.state == STATES.PAN) {
+      this._panCamera(deltaX, deltaY, deltaTime);
+    };
+
+    if(this.state == STATES.ZOOM) {
+      this._zoomCamera(deltaX, deltaY, deltaTime);
+    };
+
+    this.startPoint = this.endPoint;
+  };
+
+  CameraControls._rotateCamera = function(deltaX, deltaY, deltaTime) {
     var pitch = (deltaY * deltaTime)*rotationSpeed;
     var yaw = (deltaX * deltaTime)*rotationSpeed;
 
     this.camera.rotateX(pitch);
     this.camera.rotateY(-yaw);
 
-    this.startPoint = this.endPoint;
   };
 
-  CameraControls._panCamera = function(deltaTime) {
-    var deltaX = this.endPoint[0] - this.startPoint[0]
-    var deltaY = this.endPoint[1] - this.startPoint[1]
-    
+  CameraControls._panCamera = function(deltaX, deltaY, deltaTime) {
     var x = (deltaX * deltaTime)*panSpeed;
     var y = (deltaY * deltaTime)*panSpeed;
 
     this.camera.panX(x);
     this.camera.panY(y);
+  };
 
-    this.startPoint = this.endPoint;
+  CameraControls._zoomCamera = function(deltaX, deltaY, deltaTime) {
+    var zoomFactor = (deltaY * deltaTime)*zoomSpeed;
+
+    this.camera.zoom(zoomFactor);
   };
 
 })();

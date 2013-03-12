@@ -10,6 +10,8 @@ var MinecraftEditor = MinecraftEditor || {};
     this.target = vec3.fromValues(0,0,0);
     this.position = vec3.fromValues(0,0,-1);
 
+    this.zoomFactor = 0;
+
     this.rotation = quat.create();
     this.pitch = 0;
 
@@ -36,6 +38,10 @@ var MinecraftEditor = MinecraftEditor || {};
     var vector = vec3.fromValues(0, y, 0);
     vec3.add(this.position, this.position, vector);
     vec3.add(this.target, this.target, vector);
+  };
+
+  Camera.zoom = function(factor) {
+    this.zoomFactor += factor;
   };
 
   Camera.rotateX = function(pitch) {
@@ -68,9 +74,12 @@ var MinecraftEditor = MinecraftEditor || {};
 
     var transformedPosition = vec3.create();
     vec3.transformQuat(transformedPosition, this.position, rotation);
+    vec3.add(transformedPosition, transformedPosition, [0, 0, this.zoomFactor]);
 
     var transformedTarget = vec3.create();
     vec3.transformQuat(transformedTarget, this.target, rotation);
+    vec3.add(transformedTarget, transformedTarget, [0, 0, this.zoomFactor]);
+
     mat4.lookAt(this.viewMatrix, transformedPosition, transformedTarget, this.up);
   };
 
