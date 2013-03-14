@@ -29,7 +29,6 @@ var MinecraftEditor = MinecraftEditor || {};
     this.setupLighting();
 
     GL.uniform1i(this.shaderProgram.samplerUniform, 0);
-    this.setTextureOffsetUniforms();
     this.setMatrixUniforms();
 
     var chunk = this.chunk;
@@ -63,15 +62,6 @@ var MinecraftEditor = MinecraftEditor || {};
     mat3.invert(normalMatrix, normalMatrix);
     mat3.transpose(normalMatrix, normalMatrix);
     GL.uniformMatrix3fv(this.shaderProgram.nMatrixUniform, false, normalMatrix);
-  };
-
-  Scene.setTextureOffsetUniforms = function() {
-    var blockSize = 1.0/16;
-    var xOffset = this.blockType % 16 * blockSize;
-    GL.uniform1f(this.shaderProgram.textureOffsetX, xOffset);
-
-    var yOffset = ((this.blockType/16)|(this.blockType/16)) * blockSize;
-    GL.uniform1f(this.shaderProgram.textureOffsetY, yOffset);
   };
 
   Scene.initTextures = function() {

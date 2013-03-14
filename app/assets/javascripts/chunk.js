@@ -7,15 +7,15 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Chunk.init = function() {
     this.blocks = [];
-    var block = MinecraftEditor.Block(0, 0, 0);
+    var block = MinecraftEditor.Block(0, 0, 0, "grass");
     this.blocks.push(block);
-    var block = MinecraftEditor.Block(2, 0, 2);
+    var block = MinecraftEditor.Block(2, 0, 2, "grass");
     this.blocks.push(block);
-    var block = MinecraftEditor.Block(-4, 0, 3);
+    var block = MinecraftEditor.Block(-4, 0, 3, "wood");
     this.blocks.push(block);
-    var block = MinecraftEditor.Block(-4, 2, 3);
+    var block = MinecraftEditor.Block(-4, 2, 3, "stone");
     this.blocks.push(block);
-    var block = MinecraftEditor.Block(-2, 0, 0);
+    var block = MinecraftEditor.Block(-2, 0, 0, "wood");
     this.blocks.push(block);
     this.xRot = 0;
     this.yRot = 0;
@@ -47,7 +47,6 @@ var MinecraftEditor = MinecraftEditor || {};
 
     this.cubeVertexTextureCoordBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
-
     var textureCoords = [];
     for(var i=0; i<this.blocks.length; ++i) {
       textureCoords = textureCoords.concat(this.blocks[i].textureCoords);
@@ -55,6 +54,16 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(textureCoords), GL.STATIC_DRAW);
     this.cubeVertexTextureCoordBuffer.itemSize = 2;
     this.cubeVertexTextureCoordBuffer.numItems = textureCoords.length/2;
+
+    this.cubeVertexTextureOffsetBuffer = GL.createBuffer();
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureOffsetBuffer);
+    var textureOffsets = [];
+    for(var i=0; i<this.blocks.length; ++i) {
+      textureOffsets = textureOffsets.concat(this.blocks[i].textureOffsets);
+    }
+    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(textureOffsets), GL.STATIC_DRAW);
+    this.cubeVertexTextureOffsetBuffer.itemSize = 2;
+    this.cubeVertexTextureOffsetBuffer.numItems = textureOffsets.length/2;
 
     this.cubeVertexIndexBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.cubeVertexIndexBuffer);
@@ -81,6 +90,9 @@ var MinecraftEditor = MinecraftEditor || {};
 
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
     GL.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.cubeVertexTextureCoordBuffer.itemSize, GL.FLOAT, false, 0, 0);
+
+    GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureOffsetBuffer);
+    GL.vertexAttribPointer(shaderProgram.textureOffsetsAttribute, this.cubeVertexTextureOffsetBuffer.itemSize, GL.FLOAT, false, 0, 0);
 
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.cubeVertexIndexBuffer);
     GL.drawElements(GL.TRIANGLES, this.cubeVertexIndexBuffer.numItems, GL.UNSIGNED_SHORT, 0);

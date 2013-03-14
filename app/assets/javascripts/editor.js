@@ -8,6 +8,8 @@
 //= require scene
 //= require chunk
 //= require webgl-utils
+//= require stats.min
+
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
   Camera = MinecraftEditor.Camera;
@@ -31,6 +33,16 @@ var MinecraftEditor = MinecraftEditor || {};
     this.camera = Camera(window.innerWidth, window.innerHeight);
     this.cameraControls = CameraControls(this.camera, this.canvas);
     this.scene = Scene(this.camera, this.createShaderProgram(), this.chunk);
+
+    this.stats = new Stats();
+    this.stats.setMode(0); // 0: fps, 1: ms
+
+    // Align top-left
+    this.stats.domElement.style.position = 'absolute';
+    this.stats.domElement.style.left = '0px';
+    this.stats.domElement.style.top = '0px';
+
+    document.body.appendChild( this.stats.domElement );
     this.tick();
   };
 
@@ -57,9 +69,13 @@ var MinecraftEditor = MinecraftEditor || {};
   //};
 
   proto.tick = function() {
+    this.stats.begin();
+
     requestAnimationFrame(this.bind(this.tick));
     this.scene.render();
     this.animate();
+
+    this.stats.end();
   };
 
 
@@ -89,6 +105,9 @@ var MinecraftEditor = MinecraftEditor || {};
     program.textureCoordAttribute = GL.getAttribLocation(program, "aTextureCoord");
     GL.enableVertexAttribArray(program.textureCoordAttribute);
 
+    program.textureOffsetsAttribute = GL.getAttribLocation(program, "aTextureOffset");
+    GL.enableVertexAttribArray(program.textureOffsetsAttribute);
+
     program.pMatrixUniform = GL.getUniformLocation(program, "uPMatrix");
     program.vMatrixUniform = GL.getUniformLocation(program, "uVMatrix");
     program.mMatrixUniform = GL.getUniformLocation(program, "uMMatrix");
@@ -97,8 +116,6 @@ var MinecraftEditor = MinecraftEditor || {};
     program.ambientColorUniform = GL.getUniformLocation(program, "uAmbientColor");
     program.lightingDirectionUniform = GL.getUniformLocation(program, "uLightingDirection");
     program.directionalColorUniform = GL.getUniformLocation(program, "uDirectionalColor");
-    program.textureOffsetX = GL.getUniformLocation(program, "uTextureOffsetX");
-    program.textureOffsetY = GL.getUniformLocation(program, "uTextureOffsetY");
 
     return program;
   };

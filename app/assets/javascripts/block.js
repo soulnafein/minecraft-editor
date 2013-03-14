@@ -4,13 +4,21 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.Block = makeClass();
   var Block = MinecraftEditor.Block.prototype;
 
-  Block.init = function(x, y, z) {
+  BLOCK_TYPES = {
+    "grass" : [98, 243],
+    "stone" : [241, 241],
+    "wood" : [229, 228]
+  }
+
+  Block.init = function(x, y, z, type) {
     this.x = x;
     this.y = y;
     this.z = z;
+    this.type = type;
     this.vertices = this.calculateVertices();
     this.normals = this.calculateNormals();
     this.textureCoords = this.calculateTextureCoords();
+    this.textureOffsets = this.calculateTextureOffsets();
   };
 
   Block.calculateVertices = function() {
@@ -134,6 +142,56 @@ var MinecraftEditor = MinecraftEditor || {};
       blockSize, 0.0,
       blockSize, blockSize,
       0.0, blockSize,
+    ];
+  };
+
+  Block.calculateOffset = function(blockType) {
+    var blockSize = 1.0/16;
+    var xOffset = blockType % 16 * blockSize;
+    var yOffset = ((blockType/16)|(blockType/16)) * blockSize;
+    return [xOffset, yOffset];
+  };
+
+  Block.calculateTextureOffsets = function() {
+    var topOffset = this.calculateOffset(BLOCK_TYPES[this.type][0]);
+    var otherOffset = this.calculateOffset(BLOCK_TYPES[this.type][1]);
+
+    return [
+      // Front face
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+
+      // Back face
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+
+      // Top face
+       topOffset[0], topOffset[1],
+       topOffset[0], topOffset[1],
+       topOffset[0], topOffset[1],
+       topOffset[0], topOffset[1],
+
+      // Bottom face
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+
+      // Right face
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+
+      // Left face
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1],
+       otherOffset[0], otherOffset[1]
     ];
   };
 
