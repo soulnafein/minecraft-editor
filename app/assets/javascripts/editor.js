@@ -15,7 +15,6 @@ var MinecraftEditor = MinecraftEditor || {};
   Camera = MinecraftEditor.Camera;
   CameraControls = MinecraftEditor.CameraControls;
   Scene = MinecraftEditor.Scene;
-  Chunk = MinecraftEditor.Chunk;
 
   MinecraftEditor.Program = makeClass();
   var proto = MinecraftEditor.Program.prototype;
@@ -24,7 +23,6 @@ var MinecraftEditor = MinecraftEditor || {};
     this.canvas = document.getElementById("canvas");
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    this.chunk = Chunk();
   };
 
   proto.start = function() {
@@ -32,7 +30,7 @@ var MinecraftEditor = MinecraftEditor || {};
     //this.initKeyboard();
     this.camera = Camera(window.innerWidth, window.innerHeight);
     this.cameraControls = CameraControls(this.camera, this.canvas);
-    this.scene = Scene(this.camera, this.createShaderProgram(), this.chunk);
+    this.scene = Scene(this.camera, this.createShaderProgram());
 
     this.stats = new Stats();
     this.stats.setMode(0); // 0: fps, 1: ms

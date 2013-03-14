@@ -5,22 +5,33 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.Chunk = makeClass();
   var Chunk = MinecraftEditor.Chunk.prototype;
 
-  Chunk.init = function() {
+  CHUNK_SIZE = 32;
+
+  Chunk.init = function(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
     this.blocks = [];
-    var block = MinecraftEditor.Block(0, 0, 0, "grass");
-    this.blocks.push(block);
-    var block = MinecraftEditor.Block(2, 0, 2, "grass");
-    this.blocks.push(block);
-    var block = MinecraftEditor.Block(-4, 0, 3, "wood");
-    this.blocks.push(block);
-    var block = MinecraftEditor.Block(-4, 2, 3, "stone");
-    this.blocks.push(block);
-    var block = MinecraftEditor.Block(-2, 0, 0, "wood");
-    this.blocks.push(block);
+    for(var x = -(CHUNK_SIZE/2); x < CHUNK_SIZE/2; x+=2) {
+      for(var z = -(CHUNK_SIZE/2); z < CHUNK_SIZE/2; z+=2) {
+        this.addBlock(x, 0, z, "grass");
+      }
+    }
+
+    this.addBlock(-4, 2, 3, "stone");
+    this.addBlock(-4, 4, 3, "wood");
+    this.addBlock(-2, 2, 0, "stone");
     this.xRot = 0;
     this.yRot = 0;
     this.zRot = 0;
     this.needsBuffersRegeneration = true;
+  };
+
+  Chunk.addBlock = function(x, y, z, type) {
+    var block = MinecraftEditor.Block(x+(this.x*CHUNK_SIZE), 
+                                      y+(this.y*CHUNK_SIZE), 
+                                      z+(this.z*CHUNK_SIZE), type);
+    this.blocks.push(block);
   };
 
   Chunk.regenerateBuffers = function() {
