@@ -99,14 +99,14 @@ var MinecraftEditor = MinecraftEditor || {};
     var x = (deltaX * deltaTime)*panSpeed;
     var y = (deltaY * deltaTime)*panSpeed;
 
-    this.camera.panX(x);
-    this.camera.panY(y);
+    this.camera.panX(-x);
+    this.camera.panY(-y);
   };
 
   CameraControls._zoomCamera = function(deltaX, deltaY, deltaTime) {
     var zoomFactor = (deltaY * deltaTime)*zoomSpeed;
 
-    this.camera.zoom(zoomFactor);
+    this.camera.zoom(-zoomFactor);
   };
 
 })();
