@@ -52,7 +52,7 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Scene.setupLighting = function() {
-    GL.uniform3f(this.shaderProgram.ambientColorUniform, 0.1, 0.1, 0.1);
+    GL.uniform3f(this.shaderProgram.ambientColorUniform, 0.2, 0.2, 0.2);
     var lightingDirection = [-0.25, -0.25, -1.0];
     var adjustedLD = vec3.create();
     vec3.normalize(adjustedLD, lightingDirection);

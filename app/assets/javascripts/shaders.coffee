@@ -26,7 +26,7 @@ MinecraftEditor.Shaders.vertexShader = """
     vTextureCoord = aTextureCoord;
     vTextureOffset = aTextureOffset;
 
-    vec3 transformedNormal = uNMatrix * aVertexNormal;
+    vec3 transformedNormal = aVertexNormal;
     float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
     vLightWeighting = uAmbientColor + uDirectionalColor * directionalLightWeighting;
   }
