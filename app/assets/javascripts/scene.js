@@ -1,10 +1,10 @@
 //= require makeClass
 //= require gl-matrix-2
-//= require chunk
+//= require world
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
   MinecraftEditor.Scene = makeClass();
-  Chunk = MinecraftEditor.Chunk;
+  World = MinecraftEditor.World;
 
   Scene = MinecraftEditor.Scene.prototype;
 
@@ -14,14 +14,8 @@ var MinecraftEditor = MinecraftEditor || {};
     this.camera.moveTo([0.0, 0.0, 10.0]);
     this.camera.lookAt([0, 0, 0]);
     this.shaderProgram = shaderProgram;
-    this.chunks = [];
+    this.world = World();
     
-    for(var x = -1; x < 1; ++x) {
-      for(var z = -1; z < 1; ++z) {
-        this.chunks.push(Chunk(x,0,z));
-      }
-    }
-
     this.initTextures();
   };
 
@@ -41,14 +35,7 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.uniform1i(this.shaderProgram.samplerUniform, 0);
     this.setMatrixUniforms();
 
-    for(var i=0; i<this.chunks.length; ++i) {
-      var chunk = this.chunks[i];
-      if (chunk.needsBuffersRegeneration) {
-        chunk.regenerateBuffers();
-      }
-
-      chunk.draw(this.shaderProgram);
-    }
+    this.world.draw(this.shaderProgram);
   };
 
   Scene.setupLighting = function() {

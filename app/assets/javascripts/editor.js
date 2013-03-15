@@ -6,7 +6,6 @@
 //= require camera
 //= require camera_controls
 //= require scene
-//= require chunk
 //= require webgl-utils
 //= require stats.min
 

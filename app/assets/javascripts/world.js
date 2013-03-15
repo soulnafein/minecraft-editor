@@ -1,19 +1,16 @@
-//= require makeClass
+//= require makeClass 
 //= require block
 var MinecraftEditor = MinecraftEditor || {};
 (function() {
-  MinecraftEditor.Chunk = makeClass();
-  var Chunk = MinecraftEditor.Chunk.prototype;
+  MinecraftEditor.World = makeClass();
+  var World = MinecraftEditor.World.prototype;
 
-  CHUNK_SIZE = 32;
+  WORLD_SIZE = 64;
 
-  Chunk.init = function(x, y, z) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
+  World.init = function() {
     this.blocks = [];
-    for(var x = -(CHUNK_SIZE/2); x < CHUNK_SIZE/2; x+=2) {
-      for(var z = -(CHUNK_SIZE/2); z < CHUNK_SIZE/2; z+=2) {
+    for(var x = -(WORLD_SIZE/2); x < WORLD_SIZE/2; x+=2) {
+      for(var z = -(WORLD_SIZE/2); z < WORLD_SIZE/2; z+=2) {
         this.addBlock(x, 0, z, "grass");
       }
     }
@@ -27,14 +24,12 @@ var MinecraftEditor = MinecraftEditor || {};
     this.needsBuffersRegeneration = true;
   };
 
-  Chunk.addBlock = function(x, y, z, type) {
-    var block = MinecraftEditor.Block(x+(this.x*CHUNK_SIZE), 
-                                      y+(this.y*CHUNK_SIZE), 
-                                      z+(this.z*CHUNK_SIZE), type);
+  World.addBlock = function(x, y, z, type) {
+    var block = MinecraftEditor.Block(x, y, z, type);
     this.blocks.push(block);
   };
 
-  Chunk.regenerateBuffers = function() {
+  World.regenerateBuffers = function() {
     this.cubeVertexPositionBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     var vertices = [];
@@ -92,7 +87,10 @@ var MinecraftEditor = MinecraftEditor || {};
     this.needsBuffersRegeneration = false;
   };
 
-  Chunk.draw = function(shaderProgram) {
+  World.draw = function(shaderProgram) {
+    if (this.needsBuffersRegeneration) {
+      this.regenerateBuffers();
+    }
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     GL.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.cubeVertexPositionBuffer.itemSize, GL.FLOAT, false, 0, 0);
 
