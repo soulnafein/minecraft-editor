@@ -9,15 +9,15 @@ var MinecraftEditor = MinecraftEditor || {};
 
   World.init = function() {
     this.blocks = [];
-    for(var x = -(WORLD_SIZE/2); x < WORLD_SIZE/2; x+=2) {
-      for(var z = -(WORLD_SIZE/2); z < WORLD_SIZE/2; z+=2) {
+    for(var x = -(WORLD_SIZE/2); x < (WORLD_SIZE/2); x+=2) {
+      for(var z = -(WORLD_SIZE/2); z < (WORLD_SIZE/2); z+=2) {
         this.addBlock(x, 0, z, "grass");
       }
     }
 
-    this.addBlock(-4, 2, 3, "stone");
-    this.addBlock(-4, 4, 3, "wood");
-    this.addBlock(-2, 2, 0, "stone");
+    this.addBlock(4, 2, 3, "stone");
+    this.addBlock(4, 4, 3, "wood");
+    this.addBlock(2, 2, 0, "stone");
     this.xRot = 0;
     this.yRot = 0;
     this.zRot = 0;
@@ -27,6 +27,7 @@ var MinecraftEditor = MinecraftEditor || {};
   World.addBlock = function(x, y, z, type) {
     var block = MinecraftEditor.Block(x, y, z, type);
     this.blocks.push(block);
+    this.needsBuffersRegeneration = true;
   };
 
   World.regenerateBuffers = function() {
@@ -34,9 +35,9 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     var vertices = [];
     
-    for(var i=0; i<this.blocks.length; ++i) {
-      vertices = vertices.concat(this.blocks[i].vertices);
-    }
+    this.blocks.forEach(function(block) {
+      vertices = vertices.concat(block.vertices);
+    });
     GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(vertices), GL.STATIC_DRAW);
     this.cubeVertexPositionBuffer.itemSize = 3; 
     this.cubeVertexPositionBuffer.numItems = vertices.length/3;
@@ -44,9 +45,9 @@ var MinecraftEditor = MinecraftEditor || {};
     this.cubeVertexNormalBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexNormalBuffer);
     var vertexNormals = [];
-    for(var i=0; i<this.blocks.length; ++i) {
-      vertexNormals = vertexNormals.concat(this.blocks[i].normals);
-    }
+    this.blocks.forEach(function(block) {
+      vertexNormals = vertexNormals.concat(block.normals);
+    });
     GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(vertexNormals), GL.STATIC_DRAW);
     this.cubeVertexNormalBuffer.itemSize = 3;
     this.cubeVertexNormalBuffer.numItems = vertexNormals.length/3;
@@ -54,9 +55,9 @@ var MinecraftEditor = MinecraftEditor || {};
     this.cubeVertexTextureCoordBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureCoordBuffer);
     var textureCoords = [];
-    for(var i=0; i<this.blocks.length; ++i) {
-      textureCoords = textureCoords.concat(this.blocks[i].textureCoords);
-    }
+    this.blocks.forEach(function(block) {
+      textureCoords = textureCoords.concat(block.textureCoords);
+    });
     GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(textureCoords), GL.STATIC_DRAW);
     this.cubeVertexTextureCoordBuffer.itemSize = 2;
     this.cubeVertexTextureCoordBuffer.numItems = textureCoords.length/2;
@@ -64,9 +65,9 @@ var MinecraftEditor = MinecraftEditor || {};
     this.cubeVertexTextureOffsetBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexTextureOffsetBuffer);
     var textureOffsets = [];
-    for(var i=0; i<this.blocks.length; ++i) {
-      textureOffsets = textureOffsets.concat(this.blocks[i].textureOffsets);
-    }
+    this.blocks.forEach(function(block) {
+      textureOffsets = textureOffsets.concat(block.textureOffsets);
+    });
     GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(textureOffsets), GL.STATIC_DRAW);
     this.cubeVertexTextureOffsetBuffer.itemSize = 2;
     this.cubeVertexTextureOffsetBuffer.numItems = textureOffsets.length/2;
@@ -74,9 +75,11 @@ var MinecraftEditor = MinecraftEditor || {};
     this.cubeVertexIndexBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, this.cubeVertexIndexBuffer);
     var cubeVertexIndices = [];
-    for(var i=0; i<this.blocks.length; ++i) {
-      cubeVertexIndices = cubeVertexIndices.concat(this.blocks[i].getIndices(i));     
-    }
+    var i = 0;
+    this.blocks.forEach(function(block) {
+      cubeVertexIndices = cubeVertexIndices.concat(block.getIndices(i));     
+      i+=1;
+    });
     GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), GL.STATIC_DRAW);
     this.cubeVertexIndexBuffer.itemSize = 1;
     this.cubeVertexIndexBuffer.numItems = cubeVertexIndices.length;

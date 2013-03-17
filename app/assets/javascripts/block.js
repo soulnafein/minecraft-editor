@@ -19,6 +19,7 @@ var MinecraftEditor = MinecraftEditor || {};
     this.normals = this.calculateNormals();
     this.textureCoords = this.calculateTextureCoords();
     this.textureOffsets = this.calculateTextureOffsets();
+    this.id = this.calculateId();
   };
 
   Block.calculateVertices = function() {
@@ -213,4 +214,12 @@ var MinecraftEditor = MinecraftEditor || {};
 
     return adjustedIndices;
   }
+
+  Block.calculateId = function() {
+    var id = (this.x) |
+    (this.y << 8) |
+    (this.z << 16);
+
+    return id;
+  };
 })();
