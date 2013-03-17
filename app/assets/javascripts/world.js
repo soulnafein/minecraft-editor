@@ -5,12 +5,12 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.World = makeClass();
   var World = MinecraftEditor.World.prototype;
 
-  WORLD_SIZE = 64;
+  WORLD_SIZE = 32;
 
   World.init = function() {
     this.blocks = [];
-    for(var x = -(WORLD_SIZE/2); x < (WORLD_SIZE/2); x+=2) {
-      for(var z = -(WORLD_SIZE/2); z < (WORLD_SIZE/2); z+=2) {
+    for(var x = -(WORLD_SIZE/2); x < (WORLD_SIZE/2); x++) {
+      for(var z = -(WORLD_SIZE/2); z < (WORLD_SIZE/2); z++) {
         this.addBlock(x, 0, z, "grass");
       }
     }
