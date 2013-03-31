@@ -15,9 +15,9 @@ var MinecraftEditor = MinecraftEditor || {};
       }
     }
 
-    this.addBlock(4, 2, 3, "stone");
-    this.addBlock(4, 4, 3, "wood");
-    this.addBlock(2, 2, 0, "stone");
+    this.addBlock(4, 2, -3, "stone");
+    this.addBlock(4, 4, -3, "wood");
+    this.addBlock(2, 2, -10, "stone");
     this.xRot = 0;
     this.yRot = 0;
     this.zRot = 0;
@@ -83,8 +83,6 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), GL.STATIC_DRAW);
     this.cubeVertexIndexBuffer.itemSize = 1;
     this.cubeVertexIndexBuffer.numItems = cubeVertexIndices.length;
-
-
     
     // code for buffers
     this.needsBuffersRegeneration = false;

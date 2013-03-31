@@ -28,8 +28,8 @@ var MinecraftEditor = MinecraftEditor || {};
     GL.init(this.canvas);
     //this.initKeyboard();
     this.camera = Camera(window.innerWidth, window.innerHeight);
-    this.cameraControls = CameraControls(this.camera, this.canvas);
-    this.scene = Scene(this.camera, this.createShaderProgram());
+    this.scene = Scene(this.camera, this.createShaderProgram(), this.createShaderProgramPlain());
+    this.cameraControls = CameraControls(this.camera, this.canvas, this.scene);
 
     this.stats = new Stats();
     this.stats.setMode(0); // 0: fps, 1: ms
@@ -113,6 +113,23 @@ var MinecraftEditor = MinecraftEditor || {};
     program.ambientColorUniform = GL.getUniformLocation(program, "uAmbientColor");
     program.lightingDirectionUniform = GL.getUniformLocation(program, "uLightingDirection");
     program.directionalColorUniform = GL.getUniformLocation(program, "uDirectionalColor");
+
+    return program;
+  };
+
+  proto.createShaderProgramPlain = function() { 
+    var fragmentShader = ShaderHelper.loadFragmentShader(MinecraftEditor.Shaders.fragmentShaderPlain);
+    var vertexShader = ShaderHelper.loadVertextShader(MinecraftEditor.Shaders.vertexShaderPlain);
+
+    var shaders = [fragmentShader, vertexShader];
+    var program = ShaderHelper.createProgram(shaders);
+
+    program.vertexPositionAttribute = GL.getAttribLocation(program, "aVertexPosition");
+    GL.enableVertexAttribArray(program.vertexPositionAttribute);
+
+    program.pMatrixUniform = GL.getUniformLocation(program, "uPMatrix");
+    program.vMatrixUniform = GL.getUniformLocation(program, "uVMatrix");
+    program.mMatrixUniform = GL.getUniformLocation(program, "uMMatrix");
 
     return program;
   };

@@ -6,14 +6,15 @@ var MinecraftEditor = MinecraftEditor || {};
   MinecraftEditor.CameraControls = makeClass();
   var CameraControls = MinecraftEditor.CameraControls.prototype;
 
-  var STATES = { ROTATE: 0, PAN: 1, ZOOM: 2 };
+  var STATES = { ROTATE: 0, PAN: 1, ZOOM: 2, POINT: 3 };
   var rotationSpeed = 5;
   var panSpeed = 3;
   var zoomSpeed = 3;
 
-  CameraControls.init = function(camera, canvas) {
+  CameraControls.init = function(camera, canvas, scene) {
     this.camera = camera;
     this.canvas = canvas;
+    this.scene = scene;
     this.state = null;
     window.document.addEventListener('mousedown', this.bind( this.mousedown ), false);
     window.addEventListener('resize', this.bind( this.handleResize ), false);
@@ -24,6 +25,10 @@ var MinecraftEditor = MinecraftEditor || {};
     event.stopPropagation();
 
     if (event.button === 0) {
+      this.state = STATES.POINT;
+    }
+
+    if (event.button === 0 && event.metaKey === true) {
       this.state = STATES.ROTATE;
     }
 
@@ -51,6 +56,9 @@ var MinecraftEditor = MinecraftEditor || {};
   CameraControls.mouseup = function(event) {
     event.preventDefault();
     event.stopPropagation();
+    if (this.state == STATES.POINT) {
+      this.handleClick(event);
+    }
     this.state = null;
     this.canvas.removeEventListener('mouseup', this.boundMouseUp);
     this.canvas.removeEventListener('mousemove', this.boundMouseMove);
@@ -61,6 +69,12 @@ var MinecraftEditor = MinecraftEditor || {};
     this.canvas.height = window.innerHeight;
     this.camera.resizeViewport(this.canvas.width,
                                this.canvas.height);
+  };
+
+  CameraControls.handleClick = function(event) {
+    var start = this.camera.toWorldCoords(event.clientX, event.clientY, 0);
+    var end = this.camera.toWorldCoords(event.clientX, event.clientY, 1);
+    this.scene.addLine(start, end);
   };
 
   CameraControls.update = function(deltaTime) {

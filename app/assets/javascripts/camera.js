@@ -7,8 +7,8 @@ var MinecraftEditor = MinecraftEditor || {};
 
   Camera.init = function(viewportWidth, viewportHeight) {
     this.up = vec3.fromValues(0,1,0);
-    this.target = vec3.fromValues(0,0,0);
-    this.position = vec3.fromValues(0,0,-1);
+    this.target = vec3.fromValues(0,1,-1);
+    this.position = vec3.fromValues(0,1,0);
 
     this.zoomFactor = 0;
 
@@ -61,6 +61,7 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   Camera.moveTo = function(position) {
+    console.log(position);
     this.position = position;
   };
 
@@ -80,6 +81,7 @@ var MinecraftEditor = MinecraftEditor || {};
     vec3.transformQuat(transformedTarget, this.target, rotation);
     vec3.add(transformedTarget, transformedTarget, [0, 0, this.zoomFactor]);
 
+    this.transformedPosition = transformedPosition;
     mat4.lookAt(this.viewMatrix, transformedPosition, transformedTarget, this.up);
   };
 
@@ -91,11 +93,32 @@ var MinecraftEditor = MinecraftEditor || {};
     return this.viewMatrix;
   };
 
+  Camera.getViewProjectionInverse = function() {
+    var viewProjection = mat4.create();
+    mat4.multiply(viewProjection, this.projectionMatrix, this.viewMatrix);
+    var viewProjectionInverse = mat4.create();
+    mat4.invert(viewProjectionInverse, viewProjection);
+    return viewProjectionInverse;
+  };
+
   Camera.convertCoords = function (clientX, clientY) {
-    var x = 1.0*clientX/this.viewportWidth*2 - 1.0;
-    var y = -1.0 * (1.0*clientY/this.viewportHeight*2 - 1.0);
+    var x = 2.0*clientX/this.viewportWidth - 1.0;
+    var y = -2.0*clientY/this.viewportHeight + 1.0;
 
     return [x, y]
+  };
+
+  Camera.toWorldCoords = function(clientX, clientY, clientZ) {
+    var coords = this.convertCoords(clientX, clientY);
+    var vec = vec4.fromValues(coords[0], coords[1], clientZ, 1);
+    vec4.transformMat4(vec, vec, this.getViewProjectionInverse());
+
+    var result = [vec[0]/vec[3], 
+                  vec[1]/vec[3],
+                  vec[2]/vec[3]];
+    console.log(result);
+
+    return result;
   };
 
   function degToRad(degrees) {

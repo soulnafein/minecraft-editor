@@ -22,7 +22,7 @@ MinecraftEditor.Shaders.vertexShader = """
   varying vec3 vLightWeighting;
 
   void main(void) {
-    gl_Position = uPMatrix * uVMatrix * uMMatrix * vec4(aVertexPosition, 1.0);
+    gl_Position = uPMatrix * uVMatrix * vec4(aVertexPosition, 1.0);
     vTextureCoord = aTextureCoord;
     vTextureOffset = aTextureOffset;
 
@@ -49,3 +49,24 @@ MinecraftEditor.Shaders.fragmentShader = """
   }
 """
 
+MinecraftEditor.Shaders.vertexShaderPlain = """
+  attribute vec3 aVertexPosition;
+
+  uniform mat4 uMMatrix;
+  uniform mat4 uVMatrix;
+  uniform mat4 uPMatrix;
+
+  void main(void) {
+    gl_Position = uPMatrix * uVMatrix * uMMatrix * vec4(aVertexPosition, 1.0);
+  }
+"""
+
+MinecraftEditor.Shaders.fragmentShaderPlain = """
+  #ifdef GL_ES
+    precision highp float;
+  #endif
+
+  void main(void) {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+"""
