@@ -31,6 +31,7 @@ var MinecraftEditor = MinecraftEditor || {};
   };
 
   World.regenerateBuffers = function() {
+    var start = new Date().getTime();
     this.cubeVertexPositionBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, this.cubeVertexPositionBuffer);
     var vertices = [];
@@ -86,6 +87,9 @@ var MinecraftEditor = MinecraftEditor || {};
     
     // code for buffers
     this.needsBuffersRegeneration = false;
+    var end = new Date().getTime();
+    var time = end - start;
+    console.log("regenerateBuffers took" + time + "ms"); 
   };
 
   World.draw = function(shaderProgram) {

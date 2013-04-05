@@ -11,6 +11,7 @@ var MinecraftEditor = MinecraftEditor || {};
   }
 
   Block.init = function(x, y, z, type) {
+    var start = new Date().getTime();
     this.x = x;
     this.y = y;
     this.z = z;
@@ -20,6 +21,9 @@ var MinecraftEditor = MinecraftEditor || {};
     this.textureCoords = this.calculateTextureCoords();
     this.textureOffsets = this.calculateTextureOffsets();
     this.id = this.calculateId();
+    var end = new Date().getTime();
+    var time = end-start;
+    console.log("Created block [" + x + ", " + y + ", " + z + "] in " + time + "ms");
   };
 
   Block.calculateVertices = function() {

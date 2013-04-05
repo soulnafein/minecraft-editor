@@ -82,11 +82,141 @@ var MinecraftEditor = MinecraftEditor || {};
     this.stoneTexture = stoneTexture;
   }
 
+  function sign(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; }
+
   Scene.addLine = function(startPoint, endPoint) {
     //this.lineStartPoint = [2, 2, -10];
     //this.lineEndPoint = [4, 4, -3];
-    this.lineStartPoint = startPoint;
-    this.lineEndPoint = endPoint;
+    //this.lineStartPoint = startPoint;
+    //this.lineEndPoint = endPoint;
+    //
+    var x1, y1, z1;
+    x1 = startPoint[0];
+    y1 = startPoint[1];
+    z1 = startPoint[2];
+
+    var x2, y2, z2;
+    x2 = endPoint[0];
+    y2 = endPoint[1];
+    z2 = endPoint[2];
+
+    var xd, yd, zd,
+        x, y, z, 
+        ax, ay, az,
+        sx, sy, sz,
+        dx, dy, dz;
+
+    dx = x2 - x1;
+    dy = y2 - y1;
+    dz = z2 - z1;
+
+    ax = Math.abs(dx) << 1;
+    ay = Math.abs(dy) << 1;
+    az = Math.abs(dz) << 1;
+
+
+
+    sx = sign(dx);
+    sy = sign(dy);
+    sz = sign(dz);
+
+
+    x = x1;
+    y = y1;
+    z = z1;
+
+    if (ax >= Math.max(ay, az))            /* x dominant */
+    {
+        console.log("x dominant");
+        return;
+        yd = ay - (ax >> 1);
+        zd = az - (ax >> 1);
+        for (;;)
+        {
+            this.world.addBlock(x, y, z, 'wood');
+            if (x == x2)
+            {
+                return;
+            }
+
+            if (yd >= 0)
+            {
+                y += sy;
+                yd -= ax;
+            }
+
+            if (zd >= 0)
+            {
+                z += sz;
+                zd -= ax;
+            }
+
+            x += sx;
+            yd += ay;
+            zd += az;
+        }
+    }
+    else if (ay >= Math.max(ax, az))            /* y dominant */
+    {
+        console.log("y dominant");
+        return;
+        xd = ax - (ay >> 1);
+        zd = az - (ay >> 1);
+        for (;;)
+        {
+            this.world.addBlock(x, y, z, 'wood');
+            if (y == y2)
+            {
+                return;
+            }
+
+            if (xd >= 0)
+            {
+                x += sx;
+                xd -= ay;
+            }
+
+            if (zd >= 0)
+            {
+                z += sz;
+                zd -= ay;
+            }
+
+            y += sy;
+            xd += ax;
+            zd += az;
+        }
+    }
+    else if (az >= Math.max(ax, ay))            /* z dominant */
+    {
+        console.log("z dominant");
+        xd = ax - (az >> 1);
+        yd = ay - (az >> 1);
+        for (;;)
+        {
+            this.world.addBlock(x, y, z, 'wood');
+            if (z - z2 < 0.00001)
+            {
+                return;
+            }
+
+            if (xd >= 0)
+            {
+                x += sx;
+                xd -= az;
+            }
+
+            if (yd >= 0)
+            {
+                y += sy;
+                yd -= az;
+            }
+
+            z += sz;
+            xd += ax;
+            yd += ay;
+        }
+    }
   };
 
   Scene.drawLine = function() {
